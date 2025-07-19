@@ -1,0 +1,4 @@
+key,intValue,floatValue,stringValue,intValueList,floatValueList,comment
+turnPerDay,3,,,,,
+valueAddPerMan,5,,,,,
+startEnergy,4,,,,,

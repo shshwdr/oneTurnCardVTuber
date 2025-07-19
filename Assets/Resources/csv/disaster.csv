@@ -1,0 +1,8 @@
+identifier,actions,title,desc,canDraw,unlockAt
+noNatureMan,disableNatureMan,Activists,Half of Activists are disabled,1,
+noIndustryMan,disableIndustryMan,Scientists,Half of Scientists are disabled,1,
+loseMoreNature,IndustryLoseNature,Deforest,-10 <sprite name=Nature> when a <sprite name=Industry> gain occurs,1,
+loseMoreIndustry,natureLoseIndustry,Growth,-10 <sprite name=Industry> when a <sprite name=Nature> gain occurs,1,
+EndTurnFast,endTurn|6,Careful,"Today, turns will end after playing 6 cards",,
+doubleLose,doubleLose,Streak,Losses are doubled,1,
+disableItem,,Item malfunction,A random item is disabled today,,
