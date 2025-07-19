@@ -31,4 +31,23 @@ public class CardGameCubism : MonoBehaviour
         
         _expressionController.CurrentExpressionIndex = i;
     }
+
+    private void Update()
+    {
+        for (int i = 0; i <= 9; i++)
+        {
+            
+            if (Input.GetKeyDown(KeyCode.Alpha0 + i))
+            {
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    PlayAnim(i);
+                }
+                else
+                {
+                    PlayExpression(i);
+                }
+            }
+        }
+    }
 }
