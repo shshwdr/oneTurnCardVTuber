@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Live2D.Cubism.Framework.Motion;
 using Pool;
 using UnityEngine;
 
@@ -46,8 +47,18 @@ public class HandManager : Singleton<HandManager>
         }
     }
 
+    public CardGameCubism model;
    public void DoCardAction(CardInfo info)
     {
+        if (info.motion!=0)
+        {
+            model.PlayAnim(info.motion);
+        }
+        else if (info.expression!=0)
+        {
+            model.PlayExpression(info.expression);
+        }
+        
         int test = 0;
         for (int i = 0; i < info.actions.Count;i++)
         {
@@ -364,6 +375,7 @@ public class HandManager : Singleton<HandManager>
     }
     public void Init()
     {
+        model = FindObjectOfType<CardGameCubism>();
         ownedCards.Clear();
         handInBattle.Clear();
         discardedInBattle.Clear();

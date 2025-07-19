@@ -1,9 +1,9 @@
-identifier,actions,energy,types,start,title,desc,canDraw,exhaust,unlockAt,cardBK,cost
-0,base|10|attack,1,industry,3,Industry Work,base add 10 and attack,1,0,0,industry,1
-1,multiplier|2|attack,1,industry,3,Industry Work,multiplier add 2 and attack,1,0,0,industry,1
-2,attack,1,industry,2,Industry Work,attack,1,0,0,industry,1
-3,base|8,0,industry,2,Industry Work,base add 8,1,0,0,industry,1
-4,returnCard|3,3,industry,2,Industry Work,return 3 card to deck,1,0,0,industry,1
-5,discard|1|attack,0,industry,0,Industry Work,discardCard|1|safeAttack,1,0,0,industry,1
-6,multiplier|1,0,industry,2,Industry Work,multiplier add 1,1,0,0,industry,1
-7,base|2,1,industry,2,Industry Work,base add 1 ,1,0,0,industry,1
+identifier,actions,expression,motion,energy,types,start,title,desc,canDraw,exhaust,unlockAt,cardBK,cost
+0,base|10|attack,1,,1,industry,3,Industry Work,base add 10 and attack,1,0,0,industry,1
+1,multiplier|2|attack,2,,1,industry,3,Industry Work,multiplier add 2 and attack,1,0,0,industry,1
+2,attack,3,,1,industry,2,Industry Work,attack,1,0,0,industry,1
+3,base|8,4,,0,industry,2,Industry Work,base add 8,1,0,0,industry,1
+4,returnCard|3,5,,3,industry,2,Industry Work,return 3 card to deck,1,0,0,industry,1
+5,discard|1|attack,6,,0,industry,0,Industry Work,discardCard|1|safeAttack,1,0,0,industry,1
+6,multiplier|1,,1,0,industry,2,Industry Work,multiplier add 1,1,0,0,industry,1
+7,base|2,,2,1,industry,2,Industry Work,base add 1 ,1,0,0,industry,1

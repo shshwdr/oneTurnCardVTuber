@@ -18,6 +18,8 @@ public class CardInfo
     public bool exhaust;
     public int unlockAt;
     public string cardBK;
+    public int expression;
+    public int motion;
 }
 
 public class DisasterInfo:BaseInfo
