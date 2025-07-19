@@ -42,8 +42,8 @@ public class MeterView : MonoBehaviour
         resultTexts = resultParent.GetComponentsInChildren<TMP_Text>();
         targetTexts =  targetParent.GetComponentsInChildren<TMP_Text>();
         
-        EventPool.OptIn("IndustryChanged", UpdateView);
-        EventPool.OptIn("NatureChanged", UpdateView);
+        EventPool.OptIn("BaseValueChanged", UpdateView);
+        EventPool.OptIn("MultiplyValueChanged", UpdateView);
         
         EventTrigger eventTrigger = button.gameObject.GetComponent<EventTrigger>();
 
@@ -108,7 +108,7 @@ public class MeterView : MonoBehaviour
         var currentTurnReq = CSVLoader.Instance.turnRequirementDict[GameManager.Instance.Day];
         var reqList = isIndustry?currentTurnReq.industryReq:currentTurnReq.natureReq;
         var rewardList = isIndustry?currentTurnReq.industryReward:currentTurnReq.natureDisaster;
-        var currentValue = isIndustry? GameManager.Instance.Industry:GameManager.Instance.Nature;
+        var currentValue = isIndustry? GameManager.Instance.BaseValue:GameManager.Instance.MultiplyValue;
         value.text = currentValue +"/" + reqList.LastItem();
         if (currentValue < reqList[0])
         {

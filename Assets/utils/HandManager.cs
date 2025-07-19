@@ -60,40 +60,35 @@ public class HandManager : Singleton<HandManager>
             string action = info.actions[i];
             switch (info.actions[i])
             {
-                case "industry":
+                case "base":
                 {            
                     i++;
                     int value = int.Parse(info.actions[i]);
 
-                    GameManager.Instance.Industry += value;
-                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_industry_card");
+                    GameManager.Instance.BaseValue += value;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_industry_card");
                     break;
                 }
-                case "nature":
-                {
+                case "multiplier":
+                {            
                     i++;
                     int value = int.Parse(info.actions[i]);
 
-                    GameManager.Instance.Nature += value;
-                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_nature_card");
-                        break;
+                    GameManager.Instance.MultiplyValue += value;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_industry_card");
+                    break;
                 }
-                case "industryMan":
-                    {
-                        i++;
-                        int value = int.Parse(info.actions[i]);
-                        GameManager.Instance.AddCharacter(action, value);
-                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_spawn_scientist");
-                        break;
-                    }
-                case "natureMan":
+                case "returnCard":
                 {
-                    i++;
-                    int value = int.Parse(info.actions[i]);
-                    GameManager.Instance.AddCharacter(action, value);
-                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_spawn_activist");
-                        break;
+                    
+                    break;
                 }
+                case "attack":
+                {
+                    GameManager.Instance.Calculate();
+                    break;
+                }
+                
                 case "draw":
                 {
                     i++;
@@ -116,27 +111,7 @@ public class HandManager : Singleton<HandManager>
                         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_neutral_card");
                         break;
                 }
-                case "doubleBoost":
-                {
-                    GameManager.Instance.DoubleBoost();
-                    break;
-                }
-                case "boostIndustry":
-                case "boostNature":
-                {
-                    i++;
-                    int value = int.Parse(info.actions[i]);
-                    GameManager.Instance.AddState(action, value);
-                    break;
-                }
-                case "energy":
-                {
-                    i++;
-                    int value = int.Parse(info.actions[i]);
-                    GameManager.Instance.AddEnergy(value);
-                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_neutral_card");
-                        break;
-                }
+                
         }
         }
 
@@ -154,7 +129,7 @@ public class HandManager : Singleton<HandManager>
                    EventPool.Trigger<string>("ItemTrigger","shareBoost");
                }
             }
-            GameManager.Instance.Industry += GameManager.Instance.industryManCount * CSVLoader.Instance.miscellaneousInfoDict["valueAddPerMan"].intValue * (1+ boostCount);
+            GameManager.Instance.BaseValue += GameManager.Instance.industryManCount * CSVLoader.Instance.miscellaneousInfoDict["valueAddPerMan"].intValue * (1+ boostCount);
             if (GameManager.Instance.industryManCount>0)
             foreach (var animator in SceneRenderer.Instance.characterSpawner.spawnArea.transform.GetComponentsInChildren<Animator>())
             {
@@ -174,7 +149,7 @@ public class HandManager : Singleton<HandManager>
                    EventPool.Trigger<string>("ItemTrigger","shareBoost");
                }
             }
-            GameManager.Instance.Nature += GameManager.Instance.natureManCount* CSVLoader.Instance.miscellaneousInfoDict["valueAddPerMan"].intValue * (1+ boostCount);
+            GameManager.Instance.MultiplyValue += GameManager.Instance.natureManCount* CSVLoader.Instance.miscellaneousInfoDict["valueAddPerMan"].intValue * (1+ boostCount);
             
             {if (GameManager.Instance.natureManCount>0)
                 
@@ -238,7 +213,7 @@ public class HandManager : Singleton<HandManager>
         
         if (ItemManager.Instance.buffManager.hasBuff("addEnergyWhenDiscard"))
         {
-            GameManager.Instance.Energy += 1;
+            //GameManager.Instance.Energy += 1;
             EventPool.Trigger<string>("ItemTrigger","addEnergyWhenDiscard");
 
         }
@@ -307,6 +282,31 @@ public class HandManager : Singleton<HandManager>
             }
         }
         EventPool.Trigger("DrawHand");
+    }
+
+    public void ReturnCard(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            
+            if (handInBattle.Count == 0)
+            {
+                break;
+            }
+            var info = handInBattle.PickItem();
+            handInBattle.Remove(info);
+            // if (info.exhaust)
+            // {
+            //
+            // }
+            // else
+            // {
+            //     discardedInBattle.Add(info);
+            // }
+            deck.Add(info);
+        }
+      
+        EventPool.Trigger("DrawHand");  
     }
 
     public void ClearHandAndDrawHand()

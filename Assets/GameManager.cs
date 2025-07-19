@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Pool;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,35 +23,37 @@ public class GameManager : Singleton<GameManager>
     public Dictionary<string, int> states = new Dictionary<string, int>();
 
     private int startEnergy = 4;
-    private int energy;
+    //private int energy;
     public int Energy {
-        get => energy;
-        set
-        {
-            energy = value;
-            EventPool.Trigger("EnergyChanged");
-        }
+        get => HandManager.Instance.deck.Count;
+        // set
+        // {
+        //     Debug.LogError("Energy can't be set");
+        //     // energy = value;
+        //     // EventPool.Trigger("EnergyChanged");
+        // }
     }
 
     public bool hasEnoughEnergy(int e)
     {
-        return energy >= e;
+        return Energy >= e;
     }
 
     public void ConsumeEnergy(int e)
     {
-        Energy -= e;
+        HandManager.Instance.DrawCard(e);
+        //Energy -= e;
     }
 
     public void ResetEnergy()
     {
-        startEnergy = CSVLoader.Instance.miscellaneousInfoDict["startEnergy"].intValue;
-        if (ItemManager.Instance.buffManager.hasBuff("addEnergy"))
-        {
-            startEnergy += 1;
-
-        }
-        Energy = startEnergy;
+        // startEnergy = CSVLoader.Instance.miscellaneousInfoDict["startEnergy"].intValue;
+        // if (ItemManager.Instance.buffManager.hasBuff("addEnergy"))
+        // {
+        //     startEnergy += 1;
+        //
+        // }
+        // Energy = startEnergy;
     }
 
     public void DoubleBoost()
@@ -74,11 +77,11 @@ public class GameManager : Singleton<GameManager>
         EventPool.Trigger("StateChanged");
     }
 
-    public void AddEnergy(int value)
-    {
-        Energy += value;
-        EventPool.Trigger("EnergyChanged");
-    }
+    // public void AddEnergy(int value)
+    // {
+    //     Energy += value;
+    //     EventPool.Trigger("EnergyChanged");
+    // }
 
     public int GetState(string key)
     {
@@ -120,92 +123,116 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    private int industry;
-    private int nature;
-    private int gold;
+    private int baseValue = 1;
+    private int multiplyValue = 1;
+    private int currentTotalValue = 0;
+    private int targetValue = 200;
 
-    public int Industry
+    public int TargetValue => targetValue;
+    public void Calculate()
     {
-        get => industry;
+        var value = BaseValue * MultiplyValue;
+        currentTotalValue += value;
+        EventPool.Trigger("Calculate");
+        StartCoroutine(afterCalculate());
+    }
+
+    IEnumerator afterCalculate()
+    {
+        yield return new WaitForSeconds(2f);
+        BaseValue = half(BaseValue);
+        MultiplyValue = half(MultiplyValue);
+        EventPool.Trigger("AfterCalculate");
+    }
+
+    int half(int v)
+    {
+        var vv = (float)v / 2;
+        return (int) math.ceil(vv);
+    }
+    
+    public int BaseValue
+    {
+        get => baseValue;
         set
         {
-            if(value!=industry)
-            DamageNumbersManager.Instance.ShowResourceCollection(Hud.Instance.industryMeter, value-industry, DamageNumberType.industry);
-            var diff = value - industry;
-            if (diff < 0)
-            {
-                if (DisasterManager.Instance.buffManager.hasBuff("doubleLose"))
-                {
-                    
-                    EventPool.Trigger<string>("DisasterTrigger","doubleLose");
-                    diff *= 2;
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_disaster_loss");
-                }
-                if (ItemManager.Instance.buffManager.GetBuffValue("industryLoseAddIndustryMan") > 0)
-                {
-                    EventPool.Trigger<string>("ItemTrigger","industryLoseAddIndustryMan");
-
-                    GameManager.Instance.AddCharacter("industryMan",  ItemManager.Instance.buffManager.GetBuffValue("industryLoseAddIndustryMan"));
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_disaster_loss");
-                }
-            }else if (diff > 0)
-            {
-                if (DisasterManager.Instance.buffManager.hasBuff("IndustryLoseNature"))
-                {
-                    
-                    EventPool.Trigger<string>("DisasterTrigger","IndustryLoseNature");
-                    Nature -= 10;
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_disaster_loss");
-                }
-            }
-            industry += diff;
-            EventPool.Trigger("IndustryChanged");
+            // if(value!=baseValue)
+            // DamageNumbersManager.Instance.ShowResourceCollection(Hud.Instance.industryMeter, value-baseValue, DamageNumberType.industry);
+            var diff = value - baseValue;
+            // if (diff < 0)
+            // {
+            //     if (DisasterManager.Instance.buffManager.hasBuff("doubleLose"))
+            //     {
+            //         
+            //         EventPool.Trigger<string>("DisasterTrigger","doubleLose");
+            //         diff *= 2;
+            //         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_disaster_loss");
+            //     }
+            //     if (ItemManager.Instance.buffManager.GetBuffValue("industryLoseAddIndustryMan") > 0)
+            //     {
+            //         EventPool.Trigger<string>("ItemTrigger","industryLoseAddIndustryMan");
+            //
+            //         GameManager.Instance.AddCharacter("industryMan",  ItemManager.Instance.buffManager.GetBuffValue("industryLoseAddIndustryMan"));
+            //         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_disaster_loss");
+            //     }
+            // }else if (diff > 0)
+            // {
+            //     if (DisasterManager.Instance.buffManager.hasBuff("IndustryLoseNature"))
+            //     {
+            //         
+            //         EventPool.Trigger<string>("DisasterTrigger","IndustryLoseNature");
+            //         MultiplyValue -= 10;
+            //         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_disaster_loss");
+            //     }
+            // }
+            baseValue += diff;
+            EventPool.Trigger("BaseValueChanged");
         }
     }
-    public int Nature
+    public int MultiplyValue
     {
-        get => nature;
+        get => multiplyValue;
         set
         {
-            if(value!=nature)
-            DamageNumbersManager.Instance.ShowResourceCollection( Hud.Instance.natureMeter, value - nature, DamageNumberType.nature);
-            var diff = value - nature;
-            if (diff < 0)
-            {
-                if (DisasterManager.Instance.buffManager.hasBuff("doubleLose"))
-                {                    EventPool.Trigger<string>("DisasterTrigger","doubleLose");
-
-                    diff *= 2;
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_disaster_loss");
-                }
-                if (ItemManager.Instance.buffManager.GetBuffValue("natureLoseAddNatureMan") > 0)
-                {
-                    EventPool.Trigger<string>("ItemTrigger","natureLoseAddNatureMan");
-
-                    GameManager.Instance.AddCharacter("natureMan",  ItemManager.Instance.buffManager.GetBuffValue("natureLoseAddNatureMan"));
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_disaster_loss");
-                }
-            }else if (diff > 0)
-            {
-                if (DisasterManager.Instance.buffManager.hasBuff("natureLoseIndustry"))
-                {
-                    EventPool.Trigger<string>("DisasterTrigger","natureLoseIndustry");
-
-                    Industry -= 10;
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_disaster_loss");
-                }
-            }
-            nature += diff;
-            EventPool.Trigger("NatureChanged");
+            // if(value!=multiplyValue)
+            // DamageNumbersManager.Instance.ShowResourceCollection( Hud.Instance.natureMeter, value - multiplyValue, DamageNumberType.nature);
+            var diff = value - multiplyValue;
+            // if (diff < 0)
+            // {
+            //     if (DisasterManager.Instance.buffManager.hasBuff("doubleLose"))
+            //     {                    EventPool.Trigger<string>("DisasterTrigger","doubleLose");
+            //
+            //         diff *= 2;
+            //         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_disaster_loss");
+            //     }
+            //     if (ItemManager.Instance.buffManager.GetBuffValue("natureLoseAddNatureMan") > 0)
+            //     {
+            //         EventPool.Trigger<string>("ItemTrigger","natureLoseAddNatureMan");
+            //
+            //         GameManager.Instance.AddCharacter("natureMan",  ItemManager.Instance.buffManager.GetBuffValue("natureLoseAddNatureMan"));
+            //         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_disaster_loss");
+            //     }
+            // }else if (diff > 0)
+            // {
+            //     if (DisasterManager.Instance.buffManager.hasBuff("natureLoseIndustry"))
+            //     {
+            //         EventPool.Trigger<string>("DisasterTrigger","natureLoseIndustry");
+            //
+            //         BaseValue -= 10;
+            //         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_disaster_loss");
+            //     }
+            // }
+            multiplyValue += diff;
+            EventPool.Trigger("MultiplyValueChanged");
         }
     }
-    public int Gold
+    public int CurrentTotalValue
     {
-        get => gold;
+        get => currentTotalValue;
         set
         {
-            gold = value;
-            EventPool.Trigger("GoldChanged");
+            currentTotalValue = value;
+            EventPool.Trigger("CurrentTotalValueChanged");
         }
     }
 
@@ -241,8 +268,8 @@ public class GameManager : Singleton<GameManager>
 
     public void StartNewDay()
     {
-        industry = 0;
-        nature = 0;
+        baseValue = 1;
+        multiplyValue = 1;
         
         clearBoost();
         
@@ -298,11 +325,11 @@ public class GameManager : Singleton<GameManager>
             if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
                 
-                Industry -= 100;
+                BaseValue -= 100;
             }
             else
             {
-                Industry += 100;
+                BaseValue += 100;
                 
             }
         }
@@ -311,17 +338,17 @@ public class GameManager : Singleton<GameManager>
             
             if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
-                Nature -= 100;
+                MultiplyValue -= 100;
             }
             else
             {
-                Nature += 100;
+                MultiplyValue += 100;
                 
             }
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            Gold += 10;
+            CurrentTotalValue += 10;
         }
 
         if (Input.GetKeyDown(KeyCode.U))

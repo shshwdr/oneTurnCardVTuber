@@ -100,6 +100,12 @@ public class HandsView : Singleton<HandsView>
         UpdateHands();
     }
 
+    public void ReturnCard(int count)
+    {
+        HandManager.Instance.ReturnCard(count);
+        UpdateHands();
+    }
+
     public void DiscardHand()
     {
         HandManager.Instance.DiscardHand();

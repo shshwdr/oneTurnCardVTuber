@@ -1,0 +1,17 @@
+identifier,actions,energy,types,start,title,desc,canDraw,exhaust,unlockAt,cardBK,cost
+smallIndustry,industry|20,1,industry,1,Industry Work,+20 <sprite name=Industry>,1,0,0,industry,1
+smallNature,nature|20,1,nature,1,Nature Work,+20 <sprite name=Nature>,1,,,nature,1
+discardForIndustry,industry|50|discard|1,1,industry,0,Breakthrough,"+50 <sprite name=Industry>, discard a card",1,,,industry,1
+bigNature,nature|50,2,nature,0,Vitality,+50 <sprite name=Nature>,1,,,nature,1
+reduceIndustryForDraw,industry|-10|draw|2,0,,1,Research,"-10 <sprite name=Industry>, draw 2",1,,,industry,1
+getEnergy,nature|-10|energy|1,0,,1,Resourcing,"-10 <sprite name=Nature>, +1 <sprite name=Energy>",1,,,nature,1
+createScientists,industryMan|1,1,,1,For Science!,Spawn 1 Scientists,1,,,industry,1
+createActivists,natureMan|1,1,,1,Ecology!,Spawn 1 Activists,1,,,nature,1
+drawCards,draw|2,1,,1,Reflexion,Draw two cards,1,,,neutral,1
+safeIndustry,industry|5,0,industry,,Stimulus,+5 <sprite name=Industry>,1,,,industry,1
+safeNature,nature|5,0,nature,,Sprout,+5 <sprite name=Nature>,1,,,nature,1
+boostScientists,boostIndustry|1,2,,,Science Boost,Boost Scientists this year,1,,,industry,1
+boostActivists,boostNature|1,2,,,Ecology Boost,Boost Activists this year,1,,,nature,1
+refreshHand,industry|-10|nature|-10|discardHand|draw|5,1,,,New Vision,"-10 <sprite name=Industry>, -10 <sprite name=Nature>,  discard your hand and draw 5 cards",1,,,neutral,1
+safeNeutral,industry|+1|nature|+1,0,industry|nature,,Conciliation,"+1 <sprite name=Industry>, +1 <sprite name=Nature>",1,,,neutral,2
+doubleBoost,doubleBoost,2,,,Double Boost,Double the current Boosts,1,,,neutral,2

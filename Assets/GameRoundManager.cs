@@ -78,8 +78,8 @@ public class GameRoundManager : Singleton<GameRoundManager>
         var natureReward = Hud.Instance.natureMeter.GetComponentInParent<MeterView>().currentResult;
         
         var currentTurnReq = CSVLoader.Instance.turnRequirementDict[GameManager.Instance.Day-1];
-        var industryValue = $"{GameManager.Instance.Industry}/{currentTurnReq.industryReq.LastItem()}";
-        var natureValue = $"{GameManager.Instance.Nature}/{currentTurnReq.natureReq.LastItem()}";
+        var industryValue = $"{GameManager.Instance.BaseValue}/{currentTurnReq.industryReq.LastItem()}";
+        var natureValue = $"{GameManager.Instance.MultiplyValue}/{currentTurnReq.natureReq.LastItem()}";
         
 
         if (industryReward == "DIE")
@@ -101,7 +101,7 @@ public class GameRoundManager : Singleton<GameRoundManager>
             var goldCount  = int.Parse(industryReward);
             if (goldCount > 0)
             {
-                GameManager.Instance.Gold += goldCount;
+                GameManager.Instance.CurrentTotalValue += goldCount;
             }
             FindObjectOfType<PopupMenuResult>().ShowText($"{industryValue}",$"{natureValue}",$"Earned: {industryReward}",$"Next Disaster:{natureReward}");
             yield return new WaitUntil(() => FindObjectOfType<PopupMenuResult>().IsActive == false);
