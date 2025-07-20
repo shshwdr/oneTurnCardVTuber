@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Pool;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CalculateView : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class CalculateView : MonoBehaviour
     public TMP_Text valueText;
     public TMP_Text currentTotalValueText;
     public TMP_Text targetTotalValueText;
+    public Image element1Img;
+    public Image element2Img;
     
     // Start is called before the first frame update
     void Start()
@@ -29,6 +32,7 @@ public class CalculateView : MonoBehaviour
         //valueText.text = "";//(GameManager.Instance.BaseValue * GameManager.Instance.MultiplyValue).ToString();
         currentTotalValueText.text = GameManager.Instance.CurrentTotalValue.ToString() +"/"+GameManager.Instance.TargetValue;
         targetTotalValueText.text = "1000";
+        updateElement();
     }
     public void UpdateViewResetValue()
     {
@@ -37,6 +41,7 @@ public class CalculateView : MonoBehaviour
         valueText.text = "";//(GameManager.Instance.BaseValue * GameManager.Instance.MultiplyValue).ToString();
         currentTotalValueText.text = GameManager.Instance.CurrentTotalValue.ToString() +"/"+GameManager.Instance.TargetValue;
         targetTotalValueText.text = "1000";
+        updateElement();
     }
     
     public void UpdateCalculateView()
@@ -46,6 +51,17 @@ public class CalculateView : MonoBehaviour
         valueText.text = "="+(GameManager.Instance.BaseValue * GameManager.Instance.MultiplyValue).ToString();
         currentTotalValueText.text = GameManager.Instance.CurrentTotalValue.ToString() +"/"+GameManager.Instance.TargetValue;
         targetTotalValueText.text = "1000";
+        updateElement();
+    }
+
+    void updateElement()
+    {
+        
+        if (GameManager.Instance.element1 != -1)
+        {
+            element1Img.sprite = ElementManager.Instance.sprites[GameManager.Instance.element1];
+            element2Img.sprite = ElementManager.Instance.sprites[GameManager.Instance.element2];
+        }
     }
     
 

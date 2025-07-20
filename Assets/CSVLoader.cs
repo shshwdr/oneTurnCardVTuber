@@ -20,6 +20,8 @@ public class CardInfo
     public string cardBK;
     public int expression;
     public int motion;
+    public int element1;
+    public int element2;
 }
 
 public class DisasterInfo:BaseInfo

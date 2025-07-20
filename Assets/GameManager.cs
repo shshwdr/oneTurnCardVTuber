@@ -129,19 +129,46 @@ public class GameManager : Singleton<GameManager>
     private int targetValue = 200;
 
     public int TargetValue => targetValue;
-    public void Calculate()
+    public void Calculate(CardInfo info)
     {
         var value = BaseValue * MultiplyValue;
         currentTotalValue += value;
         EventPool.Trigger("Calculate");
-        StartCoroutine(afterCalculate());
+        StartCoroutine(afterCalculate(info));
     }
 
-    IEnumerator afterCalculate()
+    public int element1 = -1;
+    public int element2 = -1;
+
+    public void updateElement(CardInfo info)
+    {
+        
+        
+        element1 = info.element1;
+        element2 = info.element2;
+    }
+    IEnumerator afterCalculate(CardInfo info)
     {
         yield return new WaitForSeconds(2f);
-        BaseValue = half(BaseValue);
-        MultiplyValue = half(MultiplyValue);
+
+        if (element1 != -1)
+        {
+            if (info.element1 == element1 || info.element1 == element2 || info.element2 == element1 ||
+                info.element2 == element2)
+            {
+                
+            }
+            else
+            {
+                BaseValue = 1;
+                MultiplyValue = 1;
+            }
+            
+        }
+
+        updateElement(info);
+        //BaseValue = half(BaseValue);
+        //MultiplyValue = half(MultiplyValue);
         EventPool.Trigger("AfterCalculate");
     }
 

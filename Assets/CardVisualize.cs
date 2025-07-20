@@ -35,6 +35,8 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
     public CardInfo cardInfo;
     public bool setPosition;
     public GameObject disable;
+    
+    CardElement cardElement;
     public void Init(CardInfo info)
     {
         cardInfo = info;
@@ -53,6 +55,23 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
         {
             disable.SetActive(true);
         }
+
+        UpdateElement();
+    }
+
+    public void UpdateElement()
+    {
+        
+        cardElement = GetComponent<CardElement>();
+        if (cardInfo.element1 == cardInfo.element2)
+        {
+            
+
+            cardElement.Init();
+            cardInfo.element1 = cardElement.element1;
+            cardInfo.element2 = cardElement.element2;
+        }
+        cardElement.UpdateView(cardInfo);
     }
     
     public void InitItem(ItemInfo info)

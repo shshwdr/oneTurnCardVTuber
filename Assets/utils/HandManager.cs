@@ -49,7 +49,7 @@ public class HandManager : Singleton<HandManager>
 
     public CardGameCubism model;
    public void DoCardAction(CardInfo info)
-    {
+   {
         if (info.motion!=0)
         {
             model.PlayAnim(info.motion);
@@ -69,6 +69,13 @@ public class HandManager : Singleton<HandManager>
                 break;
             }
             string action = info.actions[i];
+
+            if (!info.actions.Contains("attack"))
+            {
+                
+                GameManager.Instance.updateElement(info);
+            }
+            
             switch (info.actions[i])
             {
                 case "base":
@@ -96,7 +103,7 @@ public class HandManager : Singleton<HandManager>
                 }
                 case "attack":
                 {
-                    GameManager.Instance.Calculate();
+                    GameManager.Instance.Calculate(info);
                     break;
                 }
                 

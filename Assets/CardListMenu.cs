@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pool;
 using TMPro;
 using UnityEngine;
 
@@ -60,6 +61,7 @@ public class CardListMenu : MenuBase
     {
         base.Awake();
         cardVisualizes = cardParent.GetComponentsInChildren<CardVisualize>();
+        
     }
 
 }
