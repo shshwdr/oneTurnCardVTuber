@@ -43,7 +43,47 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
     {
         cardInfo = info;
         text.text = cardInfo.title;
-        desc.text = cardInfo.desc;
+        var inputList = cardInfo.actions;// Step 1: 创建一个 List<int> 存储所有找到的整数
+        List<string> integers = new List<string>();
+
+        // Step 2: 遍历 List<string>，找到所有整数并添加到 integers 列表中
+        var lastString = "";
+        var buff = cardInfo.buff;
+        foreach (string item in inputList)
+        {
+            if (int.TryParse(item, out int number))
+            {
+                var value = number;
+                string finalValue = value.ToString();
+                switch (lastString)
+                {
+                    case "base":
+                    case "multiplier":
+                        
+                    {
+                        var buffValue = buff.GetValueOrDefault(lastString, 0);
+                        value+=buffValue;
+                        if (buffValue > 0)
+                        {
+                            finalValue = $"<color=green>{value}</color>";
+                        }
+                        break;
+                    }
+                }
+                
+                integers.Add(finalValue);
+            }
+            else
+            {
+                lastString = item;
+            }
+        }
+
+        var descText = cardInfo.desc;
+
+        descText = string.Format(descText, integers.ConvertAll(i => (object)i).ToArray());
+        
+        desc.text = descText;
         energy.text = cardInfo.energy.ToString();
         //cost.text = cardInfo.cost.ToString();
         type.text = cardInfo.types!=null &&  cardInfo.types.Count > 0 ? cardInfo.types[0] : "";

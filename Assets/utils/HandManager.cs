@@ -75,11 +75,11 @@ public class HandManager : Singleton<HandManager>
                 
                 GameManager.Instance.updateElement(info);
             }
-            
+
             switch (info.actions[i])
             {
                 case "base":
-                {            
+                {
                     i++;
                     int value = int.Parse(info.actions[i]);
 
@@ -88,7 +88,7 @@ public class HandManager : Singleton<HandManager>
                     break;
                 }
                 case "multiplier":
-                {            
+                {
                     i++;
                     int value = int.Parse(info.actions[i]);
 
@@ -108,7 +108,28 @@ public class HandManager : Singleton<HandManager>
                     GameManager.Instance.ClearLastCard();
                     break;
                 }
-                case "attack":
+                case "addCard":
+                {
+                    i++;
+                    
+                    break;
+                }
+                case "addBuff":
+                {
+                    i++;
+                    
+                    string key = info.actions[i];
+                    i++;
+                    
+                    int value = int.Parse(info.actions[i]);
+                    foreach (var cardInfo in HandManager.Instance.handInBattle)
+                    {
+                        cardInfo.addBuff(key,value);
+                    }
+                    break;
+                }
+
+            case "attack":
                 {
                     GameManager.Instance.Calculate(info);
                     break;

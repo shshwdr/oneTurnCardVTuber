@@ -22,10 +22,24 @@ public class CardInfo
     public int motion;
     public int element1;
     public int element2;
+    public Dictionary<string, int> buff;
     public CardInfo ShallowCopy()
     {
         var test =  (CardInfo)this.MemberwiseClone();
+        test.buff = new Dictionary<string, int>();
         return test;
+    }
+
+    public void addBuff(string key,int value)
+    {
+        if (!buff.ContainsKey(key))
+        {
+            buff.Add(key,value);
+        }
+        else
+        {
+            buff[key] += value;
+        }
     }
 }
 
