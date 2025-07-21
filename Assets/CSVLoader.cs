@@ -22,6 +22,11 @@ public class CardInfo
     public int motion;
     public int element1;
     public int element2;
+    public CardInfo ShallowCopy()
+    {
+        var test =  (CardInfo)this.MemberwiseClone();
+        return test;
+    }
 }
 
 public class DisasterInfo:BaseInfo

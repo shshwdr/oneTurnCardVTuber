@@ -137,24 +137,29 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(afterCalculate(info));
     }
 
-    public int element1 = -1;
-    public int element2 = -1;
+    // public int element1 = -1;
+    // public int element2 = -1;
+    public CardInfo cardInfo;
 
+    public void ClearLastCard()
+    {
+        cardInfo = null;
+    }
     public void updateElement(CardInfo info)
     {
-        
-        
-        element1 = info.element1;
-        element2 = info.element2;
+
+        cardInfo = info;
+        // element1 = info.element1;
+        // element2 = info.element2;
     }
     IEnumerator afterCalculate(CardInfo info)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
-        if (element1 != -1)
+        if (cardInfo != null)
         {
-            if (info.element1 == element1 || info.element1 == element2 || info.element2 == element1 ||
-                info.element2 == element2)
+            if (info.element1 == cardInfo.element1 || info.identifier == cardInfo.identifier)// || info.element2 == element1 ||
+               // info.element2 == element2)
             {
                 
             }

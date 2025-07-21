@@ -32,6 +32,8 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
     Vector3 startPos;
     private Vector3 hoverPos;
 
+    public bool canInteract = true;
+
     public CardInfo cardInfo;
     public bool setPosition;
     public GameObject disable;
@@ -45,7 +47,7 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
         energy.text = cardInfo.energy.ToString();
         //cost.text = cardInfo.cost.ToString();
         type.text = cardInfo.types!=null &&  cardInfo.types.Count > 0 ? cardInfo.types[0] : "";
-        cardBK.sprite = Resources.Load<Sprite>("Card/" + cardInfo.cardBK);
+        cardBK.sprite = Resources.Load<Sprite>("card/" + cardInfo.cardBK);
         if (canUseCard())
         {
             disable.SetActive(false);
@@ -63,14 +65,14 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
     {
         
         cardElement = GetComponent<CardElement>();
-        if (cardInfo.element1 == cardInfo.element2)
-        {
-            
-
-            cardElement.Init();
-            cardInfo.element1 = cardElement.element1;
-            cardInfo.element2 = cardElement.element2;
-        }
+        // if (cardInfo.element1 == cardInfo.element2)
+        // {
+        //     
+        //
+        //     cardElement.Init();
+        //     cardInfo.element1 = cardElement.element1;
+        //     cardInfo.element2 = cardElement.element2;
+        // }
         cardElement.UpdateView(cardInfo);
     }
     
@@ -96,7 +98,7 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
 
     public bool canUseCard()
     {
-        return GameManager.Instance.hasEnoughEnergy(cardInfo.energy);
+        return GameManager.Instance.hasEnoughEnergy(cardInfo.energy) ;
     }
     // Start is called before the first frame update
     void Start()
@@ -119,6 +121,10 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
     
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (!canInteract)
+        {
+            return;
+        }
         Debug.Log("OnPointerDown");
         
         OnPlace();

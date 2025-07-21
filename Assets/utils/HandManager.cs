@@ -98,7 +98,14 @@ public class HandManager : Singleton<HandManager>
                 }
                 case "returnCard":
                 {
-                    
+                    i++;
+                    int value = int.Parse(info.actions[i]);
+                    HandsView.Instance.ReturnCard(value);
+                    break;
+                }
+                case "clearLastCard":
+                {
+                    GameManager.Instance.ClearLastCard();
                     break;
                 }
                 case "attack":
@@ -377,7 +384,9 @@ public class HandManager : Singleton<HandManager>
     }
     public void AddCard(CardInfo info)
     {
-        ownedCards.Add(info);
+        var copied = info.ShallowCopy();
+        copied.element1 = Random.Range(0, ElementManager.Instance.sprites.Count);
+        ownedCards.Add(copied);
         EventPool.Trigger("HandUpdate");
     }
     public void Init()
@@ -390,7 +399,7 @@ public class HandManager : Singleton<HandManager>
         {
             for (int i = 0; i < info.start; i++)
             {
-                ownedCards.Add(info);
+                AddCard(info);
             }
             
         }

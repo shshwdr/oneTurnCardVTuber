@@ -1,17 +1,18 @@
 identifier,actions,energy,types,start,title,desc,canDraw,exhaust,unlockAt,cardBK,cost,expresslist,animList,expression,motion
-0,base|10|attack,1,industry,3,Industry Work,base add 10 and attack,1,0,0,industry,1,0 blush,0,1,4
-1,multiplier|2|attack,1,industry,3,Industry Work,multiplier add 2 and attack,1,0,0,industry,1,1 shine in eye,1 doushou,2,4
-2,attack,2,industry,2,Industry Work,attack,1,0,0,industry,1,2 wuyu,2 shake,3,4
-3,base|8,0,industry,2,Industry Work,base add 8,1,0,0,industry,1,3 close eye,3 hat,4,
-4,returnCard|3,3,industry,2,Industry Work,draw 3 cards,1,0,0,industry,1,4 normal,4 magic,5,
-5,discard|1|attack,2,industry,0,Industry Work,discardCard|1|safeAttack,1,0,0,industry,1,5 smile with close eye,5 magic fail,6,
-6,multiplier|1,0,industry,2,Industry Work,multiplier add 1,1,0,0,industry,1,6 shock,6 magic rabbit,5,1
-7,base|2,1,industry,2,Industry Work,base add 1 ,1,0,0,industry,1,7. worry,,5,1
-8,whenDiscard|addBase|2,0,,0,,,,,,,,,,,
-,addBaseEqualToEnergy,2,,0,,,,,,,,,,,
+0,base|10|attack,1,nature,3,Viral Appeal, +10 viewers and gain tips,1,0,0,nature,1,0 blush,0,1,3
+1,multiplier|2|attack,1,nature,3,High-Energy Engagement, +2 vibe and gain tips,1,0,0,nature,1,1 shine in eye,1 doushou,2,3
+2,attack,0,nature,2,Tips Time,gain tips,1,0,0,nature,1,2 wuyu,2 shake,3,3
+3,base|8,2,industry,2,New Follower Alert, +8 viewers,1,0,0,industry,1,3 close eye,3 hat,4,1
+4,returnCard|3,4,industry,2,Preparation Time,return 3 cards to deck,1,0,0,industry,1,4 normal,4 magic,5,2
+5,discard|1|attack,2,nature,0,Industry Work,discard a card and attack without reset element,1,0,0,nature,1,5 smile with close eye,5 magic fail,6,2
+6,multiplier|1,1,industry,2,Mood Lift, +1 vibe,1,0,0,industry,1,6 shock,6 magic rabbit,5,1
+7,base|2,1,industry,2,Audience Growth, +2 viewers,1,0,0,industry,1,7. worry,,5,1
+8,whenDiscard|addBase|2,0,industry,0,,"when discard a card, add base value",,,,industry,,,,,
+9,clearLastCard,1,industry,1,restart topic,"clear last card, you can use card with any element",1,0,0,industry,1,7. worry,,,
+10,addBaseEqualToEnergy,2,,0,,add base value equal to energy,,,,,,,,,
 ,addCard|bad|4,2,,,,,,,,,,,,,
 bad,base|-1,1,,,,,,,,,,,,,
-,allBaseIncrease|3,2,,,,,,,,,,,,,
+,allBaseIncrease|3,2,,,,"all card that would increase viewers, increase 3 more",,,,,,,,,
 ,allMultiplyIncrease|1,2,,,,,,,,,,,,,
 ,doubleBase,2,,,,,,,,,,,,,
 ,doubleAttack,,,,,,,,,,,,,,

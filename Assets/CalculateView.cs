@@ -14,7 +14,7 @@ public class CalculateView : MonoBehaviour
     public TMP_Text targetTotalValueText;
     public Image element1Img;
     public Image element2Img;
-    
+    public CardVisualize cardVisualize;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,10 +57,17 @@ public class CalculateView : MonoBehaviour
     void updateElement()
     {
         
-        if (GameManager.Instance.element1 != -1)
+        if (GameManager.Instance.cardInfo != null)
         {
-            element1Img.sprite = ElementManager.Instance.sprites[GameManager.Instance.element1];
-            element2Img.sprite = ElementManager.Instance.sprites[GameManager.Instance.element2];
+            // element1Img.sprite = ElementManager.Instance.sprites[GameManager.Instance.element1];
+            // element2Img.sprite = ElementManager.Instance.sprites[GameManager.Instance.element2];
+            cardVisualize.gameObject.SetActive(true);
+            cardVisualize.Init(GameManager.Instance.cardInfo);
+            cardVisualize.canInteract = false;
+        }
+        else
+        {
+            cardVisualize.gameObject.SetActive(false);
         }
     }
     
