@@ -30,16 +30,26 @@ public class CardElement : MonoBehaviour
         element1Img.sprite = ElementManager.Instance.sprites[info.element1];
         element2Img.sprite = ElementManager.Instance.sprites[info.element2];
 
-        if (GameManager.Instance.cardInfo == null || GameManager.Instance.cardInfo.element1 == info.element1 ||
-            GameManager.Instance.cardInfo.identifier == info.identifier || !info.actions.Contains("attack"))
+        if (GameManager.Instance.cardInfo != null && (GameManager.Instance.cardInfo.element1 == info.element1||  info.actions. Contains("changeAllToLast") || GameManager.Instance.cardInfo.actions.Contains("clearLastCard") || info.actions. Contains("clearLastCard")))
         {
-            GetComponentInParent<CardVisualize>().cardBK.color = Color.white;
+            GetComponentInParent<CardVisualize>().cardBK.color = new Color(1f,1f,0.5f);
         }
         else
         {
             
-            GetComponentInParent<CardVisualize>().cardBK.color = new Color(1,0.7f,0.7f);
+            GetComponentInParent<CardVisualize>().cardBK.color = Color.white;
         }
+        
+        // if (GameManager.Instance.cardInfo == null || GameManager.Instance.cardInfo.element1 == info.element1 ||
+        //     GameManager.Instance.cardInfo.identifier == info.identifier || !info.actions.Contains("attack"))
+        // {
+        //     GetComponentInParent<CardVisualize>().cardBK.color = Color.white;
+        // }
+        // else
+        // {
+        //     
+        //     GetComponentInParent<CardVisualize>().cardBK.color = new Color(1,0.7f,0.7f);
+        // }
         
         // if (GameManager.Instance.element1 == -1 || info.element1 == GameManager.Instance.element1 || info.element1 == GameManager.Instance.element2 || !info.actions.Contains("attack"))
         // {

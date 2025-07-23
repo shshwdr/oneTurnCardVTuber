@@ -138,7 +138,17 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
 
     public bool canUseCard()
     {
-        return GameManager.Instance.hasEnoughEnergy(cardInfo.energy) ;
+        var res  =  GameManager.Instance.hasEnoughEnergy(cardInfo.energy) ;
+
+        if (cardInfo.actions.Contains("changeAllToLast"))
+        {
+            if (GameManager.Instance.cardInfo ==null)
+            {
+                res = false;
+            }
+        }
+
+        return res;
     }
     // Start is called before the first frame update
     void Start()
@@ -202,7 +212,6 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
             return;
         }
 
-        GameManager.Instance.ConsumeEnergy(cardInfo.energy);
         //FindObjectOfType<TutorialMenu>().StartCoroutine( FindObjectOfType<TutorialMenu>().FinishUseCard());
        // Debug.LogError("place");
         // Collider2D[] results = new Collider2D[20]; // 假设最多检测 10 个碰撞体
@@ -216,19 +225,20 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
         //     .OrderBy(x => Vector3.Distance(x.transform.position, selectionCircle.transform.position)).ToArray();
         HandManager.Instance.useCard(cardInfo);
 
-        if (ItemManager.Instance.buffManager.hasBuff("lastCardTwice") && HandManager.Instance.handInBattle.Count == 0)
-        {
-            EventPool.Trigger<string>("ItemTrigger","lastCardTwice");
-
-            HandManager.Instance.DoCardAction(cardInfo);
-        }
-        
-        if (ItemManager.Instance.buffManager.hasBuff("drawWhenEmpty") && HandManager.Instance.handInBattle.Count == 0)
-        {            
-            EventPool.Trigger<string>("ItemTrigger","drawWhenEmpty");
-
-            HandManager.Instance.DrawCard(1);
-        }
+        GameManager.Instance.ConsumeEnergy(cardInfo.energy);
+        // if (ItemManager.Instance.buffManager.hasBuff("lastCardTwice") && HandManager.Instance.handInBattle.Count == 0)
+        // {
+        //     EventPool.Trigger<string>("ItemTrigger","lastCardTwice");
+        //
+        //     HandManager.Instance.DoCardAction(cardInfo);
+        // }
+        //
+        // if (ItemManager.Instance.buffManager.hasBuff("drawWhenEmpty") && HandManager.Instance.handInBattle.Count == 0)
+        // {            
+        //     EventPool.Trigger<string>("ItemTrigger","drawWhenEmpty");
+        //
+        //     HandManager.Instance.DrawCard(1);
+        // }
         
         bool foundTarget = false;
         

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Live2D.Cubism.Framework.Motion;
 using Pool;
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class HandManager : Singleton<HandManager>
 {
@@ -50,6 +52,11 @@ public class HandManager : Singleton<HandManager>
     public CardGameCubism model;
    public void DoCardAction(CardInfo info)
    {
+       if (!info.lateCalculateBoost)
+       {
+           
+           GameManager.Instance. calculateBoost(info);
+       }
         if (info.motion!=0)
         {
             model.PlayAnim(info.motion);
@@ -70,14 +77,37 @@ public class HandManager : Singleton<HandManager>
             }
             string action = info.actions[i];
 
-            if (!info.actions.Contains("attack"))
-            {
-                
-                GameManager.Instance.updateElement(info);
-            }
 
             switch (info.actions[i])
             {
+                case "changeAllToLast":
+                {
+                    info.element1 = GameManager.Instance.cardInfo.element1;
+                    foreach (var hCardInfo in HandManager.Instance.handInBattle)
+                    {
+                        hCardInfo.element1 = GameManager.Instance.cardInfo.element1;
+                    }
+                    
+                    break;
+                }
+                case "removeEnergy":
+                {
+                    i++;
+                    int value = int.Parse(info.actions[i]);
+                    var cardWithEnergy = HandManager.Instance.handInBattle.Where(x => x.energy > 0).ToList();
+                    cardWithEnergy.Shuffle();
+                    for (int a = 0; a < math.min(value, cardWithEnergy.Count); a++)
+                    {
+                        cardWithEnergy[a].energy = 0;
+                    }
+                    
+                    break;
+                }
+                case "addBaseEqualToEnergy":
+                {
+                    GameManager.Instance.BaseValue += GameManager.Instance.Energy;
+                    break;
+                }
                 case "base":
                 {
                     i++;
@@ -105,13 +135,22 @@ public class HandManager : Singleton<HandManager>
                 }
                 case "clearLastCard":
                 {
-                    GameManager.Instance.ClearLastCard();
+                    //GameManager.Instance.ClearLastCard();
                     break;
                 }
                 case "addCard":
                 {
                     i++;
+                    var cardName = info.actions[i];
+
                     
+                    i++;
+                    
+                    int value = int.Parse(info.actions[i]);
+                    for (int a = 0; a < value; a++)
+                    {
+                        AddCardToBattleDeck(CSVLoader.Instance.cardDict[cardName]);
+                    }
                     break;
                 }
                 case "addBuff":
@@ -128,7 +167,11 @@ public class HandManager : Singleton<HandManager>
                     }
                     break;
                 }
-
+                case "boosterToMultiplier":
+                {
+                    GameManager.Instance.MultiplyValue += GameManager.Instance.boost;
+                    break;
+                }
             case "attack":
                 {
                     GameManager.Instance.Calculate(info);
@@ -161,7 +204,17 @@ public class HandManager : Singleton<HandManager>
         }
         }
 
-
+        if (info.lateCalculateBoost)
+        {
+           
+            GameManager.Instance. calculateBoost(info);
+        }
+        
+        if (!info.actions.Contains("attack"))
+        {
+                
+            GameManager.Instance.updateElement(info);
+        }
         if (info.types.Contains("industry"))
         {
             var boostCount = GameManager.Instance.industryBoost;
@@ -408,6 +461,15 @@ public class HandManager : Singleton<HandManager>
         var copied = info.ShallowCopy();
         copied.element1 = Random.Range(0, ElementManager.Instance.sprites.Count);
         ownedCards.Add(copied);
+        EventPool.Trigger("HandUpdate");
+    }
+
+    public void AddCardToBattleDeck(CardInfo info)
+    {
+        
+        var copied = info.ShallowCopy();
+        copied.element1 = Random.Range(0, ElementManager.Instance.sprites.Count);
+        deck.Add(copied);
         EventPool.Trigger("HandUpdate");
     }
     public void Init()

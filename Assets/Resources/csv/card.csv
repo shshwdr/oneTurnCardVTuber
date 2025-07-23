@@ -1,29 +1,33 @@
-identifier,actions,energy,types,start,title,desc,canDraw,exhaust,unlockAt,cardBK,cost,expresslist,animList,expression,motion
-0,base|10|attack,1,nature,3,Viral Appeal, +10 viewers and gain tips,1,0,0,nature,1,0 blush,0,1,3
-1,multiplier|2|attack,1,nature,3,High-Energy Engagement, +2 vibe and gain tips,1,0,0,nature,1,1 shine in eye,1 doushou,2,3
-2,attack,0,nature,2,Tips Time,gain tips,1,0,0,nature,1,2 wuyu,2 shake,3,3
-3,base|8,2,industry,2,New Follower Alert, +{0} viewers,1,0,0,industry,1,3 close eye,3 hat,4,1
-4,returnCard|2,4,industry,2,Preparation Time,return {0} cards to deck,1,0,0,industry,1,4 normal,4 magic,5,2
-5,discard|1|attack,2,nature,0,Industry Work,discard {0} card and attack without reset element,1,0,0,nature,1,5 smile with close eye,5 magic fail,6,2
-6,multiplier|1,1,industry,2,Mood Lift, +{0} vibe,1,0,0,industry,1,6 shock,6 magic rabbit,5,1
-7,base|2,1,industry,2,Audience Growth, +{0} viewers,1,0,0,industry,1,7. worry,,5,1
-8,whenDiscard|addBase|2,0,industry,0,,"when discard a card, add {0} base value",,,,industry,,,,,
-9,clearLastCard,1,industry,1,restart topic,"clear last card, you can use card with any element",1,0,0,industry,1,7. worry,,,
-10,addBaseEqualToEnergy,2,industry,0,,add base value equal to energy,,,,industry,,,,,
-11,addCard|bad|4,2,industry,0,,add {0} bad card to deck,,,,industry,,,,,
-bad,base|-1,0,industry,,Dead Air, -{0} viewers when draw it,,,,industry,,,,,
-12,addBuff|base|3,2,industry,1,Clickbait Title,"all cards in hand that would increase viewers, increase {0} more",,,,industry,,,,,
-,addBuff|multiplier|1,2,industry,1,Exclusive Scoop,"all cards in hand that would increase vibe, increase {0} more",,,,industry,,,,,
-,doubleBase,2,industry,,,,,,,industry,,,,,
-,doubleAttack,,,,,,,,,industry,,,,,
-,whenDeckSizeSmallDoSomething,,,,,,,,,industry,,,,,
-,whenReturn|addBase|2,,,,,,,,,industry,,,,,
-,whenLastIsBase|addBase|2,,,,,,,,,industry,,,,,
-,ifSameCardInDiscard|addBase|2,,,,,,,,,,,,,,
-,?????????????????????????????????,,,,,,,,,,,,,,
-,"add x base and attack,x equals to card played before",,,,,,,,,,,,,,
-,"discard all card but one, that one play 5 times",,,,,,,,,,,,,,
-,base += energy in hand,,,,,,,,,,,,,,
-,make energy of a card to 0,,,,,,,,,,,,,,
-,get base back to max,,,,,,,,,,,,,,
-,change trend topic,,,,,,,,,,,,,,
+identifier,actions,energy,types,start,title,desc,canDraw,exhaust,unlockAt,cardBK,cost,expresslist,animList,expression,motion,synergyList,lateCalculateBoost
+0,base|10|attack,1,nature,2,Viral Appeal, +{0} viewers and gain tips,1,0,0,nature,1,0 blush,0,1,3,?????topic???????,
+1,multiplier|2|attack,1,nature,2,High-Energy Engagement, +{0} vibe and gain tips,1,0,0,nature,1,1 shine in eye,1 doushou,2,3,,
+2,attack,0,nature,2,Tips Time,gain tips,1,0,0,nature,1,2 wuyu,2 shake,3,3,,
+3,base|8,2,industry,2,New Follower Alert, +{0} viewers,1,0,0,industry,1,3 close eye,3 hat,4,1,,
+4,returnCard|2,4,industry,2,Preparation Time,return {0} cards to deck,1,0,0,industry,1,4 normal,4 magic,5,2,,
+5,discard|1|attack,2,nature,0,Industry Work,discard {0} card and attack without reset element,1,0,0,nature,1,5 smile with close eye,5 magic fail,6,2,,
+6,multiplier|1,1,industry,2,Mood Lift, +{0} vibe,1,0,0,industry,1,6 shock,6 magic rabbit,5,1,,
+7,base|2,1,industry,2,Audience Growth, +{0} viewers,1,0,0,industry,1,7. worry,,5,1,,
+8,whenDiscard|addBase|2,0,industry,0,,"when discard a card, add {0} base value",,,,industry,,,,,,,
+changeAllToLast,changeAllToLast,0,industry,1,,change all cards in hand to last card element,1,,,industry,,,,,4,,1
+9,clearLastCard,1,industry,1,restart topic,this card can be treat as any element,1,0,0,industry,1,7. worry,,,4,,
+10,addBaseEqualToEnergy,2,industry,1,,add base value equal to energy,,,,industry,,,,,,,
+11,addCard|bad|4,2,industry,1,,add {0} bad card to deck,,,,industry,,,,,,,
+bad,base|-1,1,industry,0,Dead Air, {0} viewers,,,,industry,,,,,,,
+12,addBuff|base|3,2,industry,1,Clickbait Title,"all cards in hand that would change viewers, increase {0} more",,,,industry,,,,,,,
+13,addBuff|multiplier|1,2,industry,1,Exclusive Scoop,"all cards in hand that would change vibe, increase {0} more",,,,industry,,,,,,,
+14,doubleBase,2,industry,,,,,,,industry,,,,,,,
+15,doubleAttack,,,,,,,,,industry,,,,,,,
+16,whenDeckSizeSmallDoSomething,,,,,,,,,industry,,,,,,,
+17,whenReturn|addBase|2,,,,,,,,,industry,,,,,,,
+18,whenLastIsBase|addBase|2,,,,,,,,,industry,,,,,,,
+19,ifSameCardInDiscard|addBase|2,,,,,,,,,,,,,,,,
+20,?????????????????????????????????,,,,,,,,,,,,,,,,
+21,"add x base and attack,x equals to card played before",,,,,,,,,,,,,,,,
+22,"discard all card but one, that one play 5 times",,,,,,,,,,,,,,,,
+23,base += energy in hand,,,,,,,,,,,,,,,,
+24,removeEnergy|2,2,industry,2,,make energy of {0} cards to 0,,,,industry,,,,,,,
+25,get base back to max,,,,,,,,,,,,,,,,
+26,change trend topic,,,,,,,,,,,,,,,,
+,change all element in hand to the last card,,,,,,,,,,,,,,,,
+,"drag three card, all cost set to 0",,,,,,,,,,,,,,,,
+boosterToMultiplier,boosterToMultiplier,1,industry,1,,add boost value to multiplier,,,,industry,,,,,,,1

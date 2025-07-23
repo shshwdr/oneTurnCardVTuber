@@ -128,9 +128,51 @@ public class GameManager : Singleton<GameManager>
     private int currentTotalValue = 0;
     private int targetValue = 200;
 
-    public int TargetValue => targetValue;
+    private List<int> targets = new List<int>()
+    {
+        1000, 1200, 1500, 2000, 3000, 5000
+    };
+
+    private int targetIndex = 0;
+    public int TargetValue {
+        get
+        {
+            var res = targets[targetIndex];
+            while (currentTotalValue >= res && targetIndex < targets.Count - 1)
+            {
+                targetIndex++;
+                res = targets[targetIndex];
+            }
+            return targets[targetIndex];
+        }
+}
+    public string TargetLevel =>targetIndex==0?"":"Lv."+targetIndex;
+
+    public int boost = 0;
+
+    public void calculateBoost(CardInfo info)
+    {
+        if (cardInfo != null)
+        {
+            if (info.element1 == cardInfo.element1 || cardInfo.actions.Contains("clearLastCard") || info.actions.Contains("clearLastCard")) //|| info.identifier == cardInfo.identifier)// || info.element2 == element1 ||
+                // info.element2 == element2)
+            {
+                boost++;
+            }
+            else
+            {
+                boost = 0;
+            }
+        }
+        else
+        {
+           // boost++;
+        }
+    }
+    
     public void Calculate(CardInfo info)
     {
+        BaseValue+=boost;
         var value = BaseValue * MultiplyValue;
         currentTotalValue += value;
         EventPool.Trigger("Calculate");
@@ -154,24 +196,23 @@ public class GameManager : Singleton<GameManager>
     }
     IEnumerator afterCalculate(CardInfo info)
     {
+        updateElement(info);
         yield return new WaitForSeconds(1f);
 
-        if (cardInfo != null)
-        {
-            if (info.element1 == cardInfo.element1 || info.identifier == cardInfo.identifier)// || info.element2 == element1 ||
-               // info.element2 == element2)
-            {
-                
-            }
-            else
-            {
-                BaseValue = 1;
-                MultiplyValue = 1;
-            }
-            
-        }
+        // if (cardInfo != null)
+        // {
+        //     if (info.element1 == cardInfo.element1 )//|| info.identifier == cardInfo.identifier)// || info.element2 == element1 ||
+        //        // info.element2 == element2)
+        //     {
+        //         BaseValue += 1;
+        //     }
+        //     else
+        //     {
+        //         // BaseValue = 1;
+        //         // MultiplyValue = 1;
+        //     }
+        // }
 
-        updateElement(info);
         //BaseValue = half(BaseValue);
         //MultiplyValue = half(MultiplyValue);
         EventPool.Trigger("AfterCalculate");
