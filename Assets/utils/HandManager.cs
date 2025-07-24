@@ -40,13 +40,13 @@ public class HandManager : Singleton<HandManager>
         DoCardAction(info);
         
         
-        if (DisasterManager.Instance.buffManager.GetBuffValue("endTurn") > 0 &&
-            placedCount >= DisasterManager.Instance.buffManager.GetBuffValue("endTurn"))
-        {
-            EventPool.Trigger<string>("DisasterTrigger","endTurn");
-            placedCount = 0;
-            HandsView.Instance.EndTurn();
-        }
+        // if (DisasterManager.Instance.buffManager.GetBuffValue("endTurn") > 0 &&
+        //     placedCount >= DisasterManager.Instance.buffManager.GetBuffValue("endTurn"))
+        // {
+        //     EventPool.Trigger<string>("DisasterTrigger","endTurn");
+        //     placedCount = 0;
+        //     HandsView.Instance.EndTurn();
+        // }
     }
 
     public CardGameCubism model;

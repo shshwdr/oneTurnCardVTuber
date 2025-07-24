@@ -11,7 +11,7 @@ public class HandsView : Singleton<HandsView>
 {
     public Transform parent;
 
-    public CardVisualize cardPrefab;
+    public GameObject cardPrefab;
     [FormerlySerializedAs("drawButton")] public Button endDayButton;
 
     public Button deckButton;
@@ -132,7 +132,9 @@ public class HandsView : Singleton<HandsView>
         foreach (var info in HandManager.Instance.handInBattle)
         {
             var go = Instantiate(cardPrefab.gameObject, parent);
-            go.GetComponent<CardVisualize>().Init(info);
+
+            FindObjectOfType<HorizontalCardHolder>().InitCard(go.GetComponentInChildren<Card>());
+            go.GetComponentInChildren<Card>().Init(info);
         }
 
         UpdatePileNumber();
