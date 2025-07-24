@@ -70,24 +70,21 @@ public class GameRoundManager : Singleton<GameRoundManager>
 
     IEnumerator showReward()
     {
-        if (GameManager.Instance.Day == 1)
-        {
-            yield break;
-        }
-        var industryReward = Hud.Instance.industryMeter.GetComponentInParent<MeterView>().currentResult;
-        var natureReward = Hud.Instance.natureMeter.GetComponentInParent<MeterView>().currentResult;
+        // if (GameManager.Instance.Day == 1)
+        // {
+        //     yield break;
+        // }
+        //var industryReward = Hud.Instance.industryMeter.GetComponentInParent<MeterView>().currentResult;
+        //var natureReward = Hud.Instance.natureMeter.GetComponentInParent<MeterView>().currentResult;
         
-        var currentTurnReq = CSVLoader.Instance.turnRequirementDict[GameManager.Instance.Day-1];
-        var industryValue = $"{GameManager.Instance.BaseValue}/{currentTurnReq.industryReq.LastItem()}";
-        var natureValue = $"{GameManager.Instance.MultiplyValue}/{currentTurnReq.natureReq.LastItem()}";
+        //var currentTurnReq = CSVLoader.Instance.turnRequirementDict[GameManager.Instance.Day-1];
+        //var industryValue = $"{GameManager.Instance.BaseValue}/{currentTurnReq.industryReq.LastItem()}";
+        //var natureValue = $"{GameManager.Instance.MultiplyValue}/{currentTurnReq.natureReq.LastItem()}";
         
 
-        if (industryReward == "DIE")
+        if (GameManager.Instance.targetIndex == 0)
         {
-            GameOver("Better get more industry points next time");
-        }else if (natureReward == "DIE")
-        {
-            GameOver("Better get more nature points next time");
+            GameOver("Better get more tips next time");
         }
         else
         {
@@ -98,30 +95,31 @@ public class GameRoundManager : Singleton<GameRoundManager>
                 yield break;
             }
             
-            var goldCount  = int.Parse(industryReward);
+            var goldCount  = GameManager.Instance.Reward;
             if (goldCount > 0)
             {
-                GameManager.Instance.CurrentTotalValue += goldCount;
+                GameManager.Instance.Gold += goldCount;
             }
-            FindObjectOfType<PopupMenuResult>().ShowText($"{industryValue}",$"{natureValue}",$"Earned: {industryReward}",$"Next Disaster:{natureReward}");
+            
+            FindObjectOfType<PopupMenuResult>().ShowText($"",$"Tips: {GameManager.Instance.CurrentTotalValue}",$"Level: {GameManager.Instance.TargetLevel}",$"Reward:{ GameManager.Instance.Reward}");
             yield return new WaitUntil(() => FindObjectOfType<PopupMenuResult>().IsActive == false);
             
-            var disasterCount = int.Parse(natureReward);
-            
-            DisasterManager.Instance.ClearDisaster();
-            if (disasterCount > 0)
-            {
-                var disasters = CSVLoader.Instance.disasterDict.Values.Where(x => x.canDraw).ToList();
-                for(int i = 0;i<disasterCount;i++)
-                {
-                    var disaster = disasters.PickItem();
-                    FindObjectOfType<PopupMenuDisaster>().ShowText($"{disaster.desc}");
-                    FindObjectOfType<PopupMenuDisaster>().ShowTitle($"{disaster.title}");
-                    DisasterManager.Instance.AddDisaster(disaster);
-                    //yield return new WaitUntil(() => FindObjectOfType<PopupMenuDisaster>().IsActive == false);
-                    
-                }
-            }
+            // var disasterCount = int.Parse(natureReward);
+            //
+            // DisasterManager.Instance.ClearDisaster();
+            // if (disasterCount > 0)
+            // {
+            //     var disasters = CSVLoader.Instance.disasterDict.Values.Where(x => x.canDraw).ToList();
+            //     for(int i = 0;i<disasterCount;i++)
+            //     {
+            //         var disaster = disasters.PickItem();
+            //         FindObjectOfType<PopupMenuDisaster>().ShowText($"{disaster.desc}");
+            //         FindObjectOfType<PopupMenuDisaster>().ShowTitle($"{disaster.title}");
+            //         DisasterManager.Instance.AddDisaster(disaster);
+            //         //yield return new WaitUntil(() => FindObjectOfType<PopupMenuDisaster>().IsActive == false);
+            //         
+            //     }
+            // }
             
             
             //Next();

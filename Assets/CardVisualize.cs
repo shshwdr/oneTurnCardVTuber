@@ -16,6 +16,8 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
     public bool isDraggable = true;
     public TMP_Text text;
     public TMP_Text desc;
+
+    public GameObject highlight;
     
     [SerializeField]
     public Image cardBK;
@@ -249,6 +251,8 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
         //selectionCircle.SetActive(false);
         ExitCard();
         //Destroy(gameObject);
+
+        GameManager.Instance.CheckPlayableAfterPlay();
     }
 
     public void Cancel()

@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using Sinbad;
 using UnityEngine;
 
+public class LevelInfo
+{
+    public string identifier;
+    public List<int> targets;
+    public List<int> rewards;
+
+}
 public class CardInfo
 {
     public string identifier;
@@ -94,6 +101,7 @@ public class CSVLoader : Singleton<CSVLoader>
     public Dictionary<string, DisasterInfo> disasterDict = new Dictionary<string, DisasterInfo>();
     public Dictionary<string, ItemInfo> itemDict = new Dictionary<string, ItemInfo>();
     public Dictionary<string, MiscellaneousInfo> miscellaneousInfoDict = new Dictionary<string, MiscellaneousInfo>();
+    public List<LevelInfo> levelInfos = new List<LevelInfo>();
 
     // Start is called before the first frame update
     public void Init()
@@ -128,6 +136,8 @@ public class CSVLoader : Singleton<CSVLoader>
         {
             miscellaneousInfoDict[info.key] = info;
         }
+        levelInfos =
+            CsvUtil.LoadObjects<LevelInfo>(GetFileNameWithABTest("level"));
     }
     
     string GetFileNameWithABTest(string name)

@@ -109,6 +109,33 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    private bool isLevelFinished = false;
+    IEnumerator CheckPlayableAfterPlayEnumerator()
+    { 
+        yield return new WaitForSeconds(1.1f);
+        if (!isLevelFinished)
+        {
+            foreach (var card in VisualCardsHandler.instance.GetComponentsInChildren<CardVisualize>())
+            {
+                if (card.canUseCard())
+                {
+                    yield break;
+                }
+            }
+        
+            isLevelFinished = true;
+            HandManager.Instance.ClearBattleHand();
+        
+            GameRoundManager.Instance.Next();
+        }
+        
+    }
+    public void CheckPlayableAfterPlay()
+    {
+        StartCoroutine(CheckPlayableAfterPlayEnumerator());
+
+    }
+
     public int turnInDay = 3;
     private int turn = 1;
 
@@ -128,12 +155,9 @@ public class GameManager : Singleton<GameManager>
     private int currentTotalValue = 0;
     private int targetValue = 200;
 
-    private List<int> targets = new List<int>()
-    {
-        1000, 1200, 1500, 2000, 3000, 5000
-    };
+    private List<int> targets => LevelInfo.targets;
 
-    private int targetIndex = 0;
+    public int targetIndex = 0;
     public int TargetValue {
         get
         {
@@ -146,7 +170,11 @@ public class GameManager : Singleton<GameManager>
             return targets[targetIndex];
         }
 }
+
+    private LevelInfo levelInfo;
+    public LevelInfo LevelInfo => levelInfo!=null ? levelInfo:CSVLoader.Instance.levelInfos[0];
     public string TargetLevel =>targetIndex==0?"":"Lv."+targetIndex;
+    public int Reward => LevelInfo.rewards[targetIndex-1];
 
     public int boost = 0;
 
@@ -309,6 +337,19 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    private int gold;
+    public int Gold
+    {
+        get
+        {
+             return gold;
+        }
+        set
+        {
+            gold = value;
+        }
+    }
+
     private Dictionary<string, int> charactersDict = new Dictionary<string, int>();
 
     public void AddCharacter(string key, int value)
@@ -339,23 +380,26 @@ public class GameManager : Singleton<GameManager>
         return 0;
     }
 
+    
+    
     public void StartNewDay()
     {
-        baseValue = 1;
-        multiplyValue = 1;
-        
+        levelInfo = CSVLoader.Instance.levelInfos[day - 1];
+        BaseValue = 1;
+        MultiplyValue = 1;
+        isLevelFinished = false;
         clearBoost();
         
-        foreach (var meterView in FindObjectsOfType<MeterView>())
-        {
-            meterView.UpdateViewForStartOfTurn();
-        }
+        // foreach (var meterView in FindObjectsOfType<MeterView>())
+        // {
+        //     meterView.UpdateViewForStartOfTurn();
+        // }
         
         
         EventPool.Trigger("DayChanged");
-        //HandsView.Instance.ResetHandAndDrawHand();
+        HandsView.Instance.ResetHandAndDrawHand();
         
-        ResetEnergy();
+        //ResetEnergy();
     }
     public void clearBoost()
     {
@@ -367,7 +411,7 @@ public class GameManager : Singleton<GameManager>
         turnInDay = CSVLoader.Instance.miscellaneousInfoDict["turnPerDay"].intValue + 1;
         Turn = 1;
         Day = 1;
-        HandsView.Instance.ResetHandAndDrawHand();
+        //HandsView.Instance.ResetHandAndDrawHand();
         foreach (var meterView in FindObjectsOfType<MeterView>())
         {
             meterView.UpdateViewForStartOfTurn();

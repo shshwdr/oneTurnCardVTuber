@@ -173,8 +173,14 @@ public class HandManager : Singleton<HandManager>
                     GameManager.Instance.MultiplyValue += GameManager.Instance.boost;
                     break;
                 }
-            case "attack":
+                case "attack":
                 {
+                    GameManager.Instance.Calculate(info);
+                    break;
+                }
+                case "attackD":
+                {
+                    GameManager.Instance.Calculate(info);
                     GameManager.Instance.Calculate(info);
                     break;
                 }
@@ -459,6 +465,8 @@ public class HandManager : Singleton<HandManager>
 
     public void ClearBattleHand()
     {
+        HandsView.Instance.RemoveAllFromHand();
+        
         handInBattle.Clear();
         discardedInBattle.Clear();
         EventPool.Trigger("DrawHand");

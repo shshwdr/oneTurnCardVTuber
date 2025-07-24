@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using Pool;
 using TMPro;
@@ -168,6 +169,13 @@ public class HandsView : Singleton<HandsView>
         UpdateHandView();
     }
 
+    public void RemoveAllFromHand()
+    {
+        foreach (var info in HandManager.Instance.handInBattle.ToList())
+        {
+            RemoveCardFromHand(info, RemoveFromHandType.toDiscard);
+        }
+    }
     public void RemoveCardFromHand(CardInfo info,RemoveFromHandType type)
     {
         var target = transform.position;

@@ -81,6 +81,12 @@ public class CardSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!cardVisual.GetComponentInChildren<CardVisualize>().canUseCard())
+        {
+            return;
+        }
+        
+        
         BeginDragEvent.Invoke(this);
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         offset = mousePosition - (Vector2)transform.position;
@@ -97,6 +103,12 @@ public class CardSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        
+        if (!cardVisual.GetComponentInChildren<CardVisualize>().canUseCard())
+        {
+            return;
+        }
+        
         EndDragEvent.Invoke(this);
         isDragging = false;
         canvas.GetComponent<GraphicRaycaster>().enabled = true;
