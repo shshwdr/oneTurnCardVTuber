@@ -36,23 +36,23 @@ public class ShopMenu : MenuBase
         }
 
 
-        {
-            var allCandidates = CSVLoader.Instance.itemDict.Values.Where(x => x.canDraw && !ItemManager.Instance.items.Contains(x)).ToList();
-
-            // foreach (var cell in itemsParent1.GetComponentsInChildren<ShopCell>(true))
-            // {
-            //     cell.InitItem(allCandidates.PickItem());
-            //    // cell.cardVisualize.isInShop = true;
-            //     FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_ui_click");
-            // }
-
-            foreach (var cell in itemsParent2.GetComponentsInChildren<ShopCell>(true))
-            {
-                cell.InitItem(allCandidates.PickItem());
-               // cell.cardVisualize.isInShop = true;
-                FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_ui_click");
-            }
-        }
+        // {
+        //     var allCandidates = CSVLoader.Instance.itemDict.Values.Where(x => x.canDraw && !ItemManager.Instance.items.Contains(x)).ToList();
+        //
+        //     // foreach (var cell in itemsParent1.GetComponentsInChildren<ShopCell>(true))
+        //     // {
+        //     //     cell.InitItem(allCandidates.PickItem());
+        //     //    // cell.cardVisualize.isInShop = true;
+        //     //     FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_ui_click");
+        //     // }
+        //
+        //     foreach (var cell in itemsParent2.GetComponentsInChildren<ShopCell>(true))
+        //     {
+        //         cell.InitItem(allCandidates.PickItem());
+        //        // cell.cardVisualize.isInShop = true;
+        //         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_ui_click");
+        //     }
+        // }
         UpdateMenu();
     }
 
@@ -73,19 +73,19 @@ public class ShopMenu : MenuBase
         //     cell.UpdateCell();
         // }
 
-        foreach (var cell in itemsParent2.GetComponentsInChildren<ShopCell>(true))
-        {
-            cell.UpdateCell();
-        }
+        // foreach (var cell in itemsParent2.GetComponentsInChildren<ShopCell>(true))
+        // {
+        //     cell.UpdateCell();
+        // }
 
         foreach (var cell in cardsParent1.GetComponentsInChildren<ShopCell>(true))
         {
             cell.UpdateCell();
         }
 
-        foreach (var cell in cardsParent2.GetComponentsInChildren<ShopCell>(true))
-        {
-            cell.UpdateCell();
-        }
+        // foreach (var cell in cardsParent2.GetComponentsInChildren<ShopCell>(true))
+        // {
+        //     cell.UpdateCell();
+        // }
     }
 }

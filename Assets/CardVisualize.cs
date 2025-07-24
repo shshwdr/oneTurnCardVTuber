@@ -51,6 +51,10 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
         // Step 2: 遍历 List<string>，找到所有整数并添加到 integers 列表中
         var lastString = "";
         var buff = cardInfo.buff;
+        if (buff == null)
+        {
+            buff = new Dictionary<string, int>();
+        }
         foreach (string item in inputList)
         {
             if (int.TryParse(item, out int number))

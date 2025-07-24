@@ -32,12 +32,12 @@ public class CardElement : MonoBehaviour
 
         if (GameManager.Instance.cardInfo != null && (GameManager.Instance.cardInfo.element1 == info.element1||  info.actions. Contains("changeAllToLast") || GameManager.Instance.cardInfo.actions.Contains("clearLastCard") || info.actions. Contains("clearLastCard")))
         {
-            GetComponentInParent<CardVisualize>().highlight.SetActive(true);
+            GetComponentInParent<CardVisualize>(true).highlight.SetActive(true);
         }
         else
         {
             
-            GetComponentInParent<CardVisualize>().highlight.SetActive(false);
+            GetComponentInParent<CardVisualize>(true).highlight.SetActive(false);
         }
         
         // if (GameManager.Instance.cardInfo == null || GameManager.Instance.cardInfo.element1 == info.element1 ||
