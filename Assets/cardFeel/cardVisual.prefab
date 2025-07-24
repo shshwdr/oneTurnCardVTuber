@@ -87,12 +87,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d8592fe02773c4ca7e96e6c7fb55ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentCard: {fileID: 0}
+  parentCardSlot: {fileID: 0}
   visualShadow: {fileID: 7500835371575417364}
   shakeParent: {fileID: 4820698555111142468}
   tiltParent: {fileID: 5708614419211650942}
   cardImage: {fileID: 2613528420499873061}
-  followSpeed: 25
+  followSpeed: 10
   rotationAmount: 70
   rotationSpeed: 50
   autoTiltAmount: 15

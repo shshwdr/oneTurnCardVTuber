@@ -353,7 +353,7 @@ public class GameManager : Singleton<GameManager>
         
         
         EventPool.Trigger("DayChanged");
-        HandsView.Instance.ResetHandAndDrawHand();
+        //HandsView.Instance.ResetHandAndDrawHand();
         
         ResetEnergy();
     }

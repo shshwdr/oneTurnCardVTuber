@@ -322,11 +322,11 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
 
     public void ExitCard()
     {
-        if (this && transform)
-        {
-            MoveCardUp(false);
-            //transform.position = startPos;
-        }
+        // if (this && transform)
+        // {
+        //     MoveCardUp(false);
+        //     //transform.position = startPos;
+        // }
     }
 
     private void MoveCardUp(bool status)

@@ -33,6 +33,7 @@ public class HandManager : Singleton<HandManager>
         }
         else
         {
+            HandsView.Instance.RemoveCardFromHand(info, RemoveFromHandType.toDiscard);
             discardedInBattle.Add(info);
         }
         EventPool.Trigger("DrawHand");
@@ -345,6 +346,7 @@ public class HandManager : Singleton<HandManager>
             else
             {
                 discardedInBattle.Add(info);
+                HandsView.Instance.RemoveCardFromHand(info, RemoveFromHandType.toDiscard);
             }
         }
       
@@ -374,10 +376,12 @@ public class HandManager : Singleton<HandManager>
                 break;
             }
 
-           
+
             {
-                
-                handInBattle.Add(deck.PickItem());
+
+                var info = deck.PickItem();
+                handInBattle.Add(info);
+                HandsView.Instance.AddCardToHand(info);
             }
         }
         EventPool.Trigger("DrawHand");
@@ -394,6 +398,7 @@ public class HandManager : Singleton<HandManager>
             }
             var info = handInBattle.PickItem();
             handInBattle.Remove(info);
+            HandsView.Instance.RemoveCardFromHand(info, RemoveFromHandType.toDeck);
             // if (info.exhaust)
             // {
             //
@@ -411,6 +416,7 @@ public class HandManager : Singleton<HandManager>
     public void ClearHandAndDrawHand()
     {
         ClearHand();
+        
         DrawHand();
       
     }
@@ -443,8 +449,9 @@ public class HandManager : Singleton<HandManager>
 
            
             {
-                
-                handInBattle.Add(deck.PickItem());
+                var info = deck.PickItem();
+                handInBattle.Add(info);
+                HandsView.Instance.AddCardToHand(info);
             }
         }
         EventPool.Trigger("DrawHand");

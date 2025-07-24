@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Pool;
 using TMPro;
 using Unity.Mathematics;
@@ -7,6 +8,11 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
+public enum RemoveFromHandType
+{
+    toDiscard,
+    toDeck
+}
 public class HandsView : Singleton<HandsView>
 {
     public Transform parent;
@@ -16,6 +22,7 @@ public class HandsView : Singleton<HandsView>
 
     public Button deckButton;
     public Button discardButton;
+    public float moveTime = 1;
 
     public void InitLevel()
     {
@@ -28,8 +35,8 @@ public class HandsView : Singleton<HandsView>
         //     var go = Instantiate(cardPrefab.gameObject, parent);
         //     go.GetComponent<CardVisualize>().Init(info);
         // }
-        EventPool.OptIn("DrawHand", UpdateHands);
-        UpdateHands();
+        EventPool.OptIn("DrawHand", UpdateHandView);
+        //UpdateHands();
         endDayButton.onClick.AddListener(() =>
         {
             EndTurn();
@@ -46,14 +53,14 @@ public class HandsView : Singleton<HandsView>
         });
         //UpdatePileNumber();
         EventPool.OptIn("HandUpdate", UpdatePileNumber);
-        EventPool.OptIn("EnergyChanged", UpdateHands);
-        EventPool.OptIn("EnergyChanged", UpdateHands);
+        EventPool.OptIn("EnergyChanged", UpdateHandView);
+        EventPool.OptIn("EnergyChanged", UpdateHandView);
         
         
-        EventPool.OptIn("BaseValueChanged", UpdateHands);
-        EventPool.OptIn("MultiplyValueChanged", UpdateHands);
-        EventPool.OptIn("Calculate", UpdateHands);
-        EventPool.OptIn("AfterCalculate", UpdateHands);
+        EventPool.OptIn("BaseValueChanged", UpdateHandView);
+        EventPool.OptIn("MultiplyValueChanged", UpdateHandView);
+        EventPool.OptIn("Calculate", UpdateHandView);
+        EventPool.OptIn("AfterCalculate", UpdateHandView);
     }
 
     public void UpdatePileNumber()
@@ -85,12 +92,12 @@ public class HandsView : Singleton<HandsView>
     public void ResetHandAndDrawHand()
     {
         HandManager.Instance.ClearHandAndDrawHand();
-        UpdateHands();
+        //UpdateHands();
     }
     public void DrawHand()
     {
         HandManager.Instance.DrawHand();
-        UpdateHands();
+        //UpdateHands();
 
         //FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_draw_card");
     }
@@ -98,30 +105,30 @@ public class HandsView : Singleton<HandsView>
     public void ClearHand()
     {
         HandManager.Instance.ClearHand();
-        UpdateHands();
+        //UpdateHands();
     }
 
     public void DrawCards(int count)
     {
         HandManager.Instance.DrawCard(count);
-        UpdateHands();
+        //UpdateHands();
     }
 
     public void ReturnCard(int count)
     {
         HandManager.Instance.ReturnCard(count);
-        UpdateHands();
+        //UpdateHands();
     }
 
     public void DiscardHand()
     {
         HandManager.Instance.DiscardHand();
-        UpdateHands();
+        //UpdateHands();
     }
     public void DiscardCards(int count)
     {
         HandManager.Instance.DiscardCards(count);
-        UpdateHands();
+        //UpdateHands();
     }
     public void UpdateHands()
     {
@@ -133,11 +140,67 @@ public class HandsView : Singleton<HandsView>
         {
             var go = Instantiate(cardPrefab.gameObject, parent);
 
-            FindObjectOfType<HorizontalCardHolder>().InitCard(go.GetComponentInChildren<Card>());
-            go.GetComponentInChildren<Card>().Init(info);
+            FindObjectOfType<HorizontalCardHolder>().InitCard(go.GetComponentInChildren<CardSlot>());
+            go.GetComponentInChildren<CardSlot>().Init(info);
         }
 
         UpdatePileNumber();
+    }
+
+    public void UpdateHandView()
+    {
+        
+        foreach (var info in VisualCardsHandler.instance. GetComponentsInChildren<CardVisualize>())
+        {
+            info.Init(info.cardInfo);
+        }
+
+        UpdatePileNumber();
+    }
+
+    public void AddCardToHand(CardInfo info)
+    {
+        var go = Instantiate(cardPrefab.gameObject, parent);
+
+        FindObjectOfType<HorizontalCardHolder>().InitCard(go.GetComponentInChildren<CardSlot>());
+        go.GetComponentInChildren<CardSlot>().Init(info);
+
+        UpdateHandView();
+    }
+
+    public void RemoveCardFromHand(CardInfo info,RemoveFromHandType type)
+    {
+        var target = transform.position;
+        switch (type)
+        {
+            case RemoveFromHandType.toDiscard:
+                target = discardButton.transform.position;
+                break;
+            case RemoveFromHandType.toDeck:
+                target = deckButton.transform.position;
+                break;
+        }
+        foreach (var slot in parent.GetComponentsInChildren<CardSlot>())
+        {
+            var card = slot.cardVisual;
+            var cardInfo = card.GetComponentInChildren<CardVisualize>().cardInfo;
+            if (cardInfo == info)
+            {
+                card.parentCardSlot = null;
+                Destroy(slot.transform.parent.gameObject);
+
+                card.transform.DOMove(target, moveTime);
+                card.transform.DOScale(0.1f, moveTime);
+                card.transform.DORotate(new Vector3(0, 0, 720), moveTime, RotateMode.FastBeyond360);
+                Destroy(card.gameObject,moveTime);
+            }
+        }
+        UpdateHandView();
+    }
+
+    public void RemoveAllCardFromHand()
+    {
+        
     }
 
 }

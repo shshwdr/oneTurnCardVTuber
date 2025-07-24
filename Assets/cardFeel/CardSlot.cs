@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
 
-public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler
+public class CardSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler
 {
     private Canvas canvas;
     private Image imageComponent;
@@ -33,13 +33,13 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     [HideInInspector] public bool wasDragged;
 
     [Header("Events")]
-    [HideInInspector] public UnityEvent<Card> PointerEnterEvent;
-    [HideInInspector] public UnityEvent<Card> PointerExitEvent;
-    [HideInInspector] public UnityEvent<Card, bool> PointerUpEvent;
-    [HideInInspector] public UnityEvent<Card> PointerDownEvent;
-    [HideInInspector] public UnityEvent<Card> BeginDragEvent;
-    [HideInInspector] public UnityEvent<Card> EndDragEvent;
-    [HideInInspector] public UnityEvent<Card, bool> SelectEvent;
+    [HideInInspector] public UnityEvent<CardSlot> PointerEnterEvent;
+    [HideInInspector] public UnityEvent<CardSlot> PointerExitEvent;
+    [HideInInspector] public UnityEvent<CardSlot, bool> PointerUpEvent;
+    [HideInInspector] public UnityEvent<CardSlot> PointerDownEvent;
+    [HideInInspector] public UnityEvent<CardSlot> BeginDragEvent;
+    [HideInInspector] public UnityEvent<CardSlot> EndDragEvent;
+    [HideInInspector] public UnityEvent<CardSlot, bool> SelectEvent;
 
     public void Init(CardInfo info)
     {
@@ -187,9 +187,9 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         return transform.parent.CompareTag("Slot") ? ExtensionMethods.Remap((float)ParentIndex(), 0, (float)(transform.parent.parent.childCount - 1), 0, 1) : 0;
     }
 
-    private void OnDestroy()
-    {
-        if(cardVisual != null)
-        Destroy(cardVisual.gameObject);
-    }
+    // private void OnDestroy()
+    // {
+    //     if(cardVisual != null)
+    //     Destroy(cardVisual.gameObject);
+    // }
 }
