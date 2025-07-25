@@ -60,7 +60,6 @@ public class CardSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     void Update()
     {
         ClampPosition();
-
         if (isDragging)
         {
             Vector2 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - offset;

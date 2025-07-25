@@ -144,6 +144,11 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
 
     public bool canUseCard()
     {
+        if (FindObjectOfType<SelectCardsView>().isActive)
+        {
+            return true;
+        }
+        
         var res  =  GameManager.Instance.hasEnoughEnergy(cardInfo.energy) ;
 
         if (cardInfo.actions.Contains("changeAllToLast"))
@@ -215,6 +220,8 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
         {
             return;
         }
+
+        
         if (!GameManager.Instance.hasEnoughEnergy(cardInfo.energy))
         {
             return;

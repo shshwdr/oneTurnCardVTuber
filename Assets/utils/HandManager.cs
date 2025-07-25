@@ -131,7 +131,8 @@ public class HandManager : Singleton<HandManager>
                 {
                     i++;
                     int value = int.Parse(info.actions[i]);
-                    HandsView.Instance.ReturnCard(value);
+                    FindObjectOfType<SelectCardsView>().Show( value, SelectCardsViewType.Return);
+                    //HandsView.Instance.ReturnCard(value);
                     break;
                 }
                 case "clearLastCard":
@@ -197,7 +198,8 @@ public class HandManager : Singleton<HandManager>
                 {
                     i++;
                     int value = int.Parse(info.actions[i]);
-                    HandsView.Instance.DiscardCards(value);
+                    FindObjectOfType<SelectCardsView>().Show( value, SelectCardsViewType.Discard);
+                    //HandsView.Instance.DiscardCards(value);
                         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_neutral_card");
                         break;
                 }
@@ -333,6 +335,20 @@ public class HandManager : Singleton<HandManager>
         }
         
     }
+
+    public void DiscardCard(CardInfo info)
+    {
+        handInBattle.Remove(info);
+        if (info.exhaust)
+        {
+            
+        }
+        else
+        {
+            discardedInBattle.Add(info);
+            HandsView.Instance.RemoveCardFromHand(info, RemoveFromHandType.toDiscard);
+        }
+    }
     public void DiscardCards(int count)
     {
         TriggerDiscardEffect();
@@ -344,16 +360,7 @@ public class HandManager : Singleton<HandManager>
                 break;
             }
             var info = handInBattle.PickItem();
-            handInBattle.Remove(info);
-            if (info.exhaust)
-            {
-            
-            }
-            else
-            {
-                discardedInBattle.Add(info);
-                HandsView.Instance.RemoveCardFromHand(info, RemoveFromHandType.toDiscard);
-            }
+            DiscardCard( info);
         }
       
         EventPool.Trigger("DrawHand");  
@@ -417,6 +424,22 @@ public class HandManager : Singleton<HandManager>
         }
       
         EventPool.Trigger("DrawHand");  
+    }
+
+    public void ReturnCard(CardInfo info)
+    {
+        
+        handInBattle.Remove(info);
+        HandsView.Instance.RemoveCardFromHand(info, RemoveFromHandType.toDeck);
+        // if (info.exhaust)
+        // {
+        //
+        // }
+        // else
+        // {
+        //     discardedInBattle.Add(info);
+        // }
+        deck.Add(info);
     }
 
     public void ClearHandAndDrawHand()

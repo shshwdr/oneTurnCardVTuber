@@ -66,6 +66,8 @@ public class CardVisual : MonoBehaviour
     private float curveRotationOffset;
     private Coroutine pressCoroutine;
 
+    public bool isSelected;
+
     private void Start()
     {
         shadowDistance = visualShadow.localPosition;
@@ -120,6 +122,11 @@ public class CardVisual : MonoBehaviour
 
     private void SmoothFollow()
     {
+        
+        if (isSelected)
+        {
+            return;
+        }
         Vector3 verticalOffset = (Vector3.up * (parentCardSlot.isDragging ? 0 : curveYOffset));
         transform.position = Vector3.Lerp(transform.position, cardTransform.position + verticalOffset, followSpeed * Time.deltaTime);
     }
@@ -218,6 +225,11 @@ public class CardVisual : MonoBehaviour
 
     private void PointerDown(CardSlot cardSlot)
     {
+        // if (FindObjectOfType<SelectCardsView>().isActive)
+        // {
+        //     FindObjectOfType<SelectCardsView>().tryRemove(cardSlot);
+        //
+        // }
         // if(scaleAnimations)
         //     transform.DOScale(scaleOnSelect, scaleTransition).SetEase(scaleEase);
         //     

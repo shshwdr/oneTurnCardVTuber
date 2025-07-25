@@ -113,6 +113,10 @@ public class GameManager : Singleton<GameManager>
     IEnumerator CheckPlayableAfterPlayEnumerator()
     { 
         yield return new WaitForSeconds(1.1f);
+        if (FindObjectOfType<SelectCardsView>().isActive)
+        {
+            yield break;
+        }
         if (!isLevelFinished)
         {
             foreach (var card in VisualCardsHandler.instance.GetComponentsInChildren<CardVisualize>())

@@ -77,13 +77,26 @@ public class HorizontalCardHolder : MonoBehaviour
     {
         if (selectedCardSlot == null)
             return;
-
-        if (selectedCardSlot.transform.localPosition.y > selectedCardSlot.selectionOffset*2)
-        {
-            selectedCardSlot.cardVisual.GetComponentInChildren<CardVisualize>().OnPlace();
-            return;
-        }
         
+        
+        if (FindObjectOfType<SelectCardsView>().isActive)
+        {
+            if (FindObjectOfType<SelectCardsView>().tryInteract(cardSlot))
+            {
+                
+                //return;
+            }
+        }
+        else
+        {
+            if (selectedCardSlot.transform.localPosition.y > selectedCardSlot.selectionOffset*2)
+            {
+                selectedCardSlot.cardVisual.GetComponentInChildren<CardVisualize>().OnPlace();
+                return;
+            }
+
+        }
+
         selectedCardSlot.transform.DOLocalMove(selectedCardSlot.selected ? new Vector3(0,selectedCardSlot.selectionOffset,0) : Vector3.zero, tweenCardReturn ? .15f : 0).SetEase(Ease.OutBack);
 
         rect.sizeDelta += Vector2.right;

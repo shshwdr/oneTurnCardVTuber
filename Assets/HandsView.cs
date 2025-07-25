@@ -205,6 +205,23 @@ public class HandsView : Singleton<HandsView>
         }
         UpdateHandView();
     }
+    
+    public void RemoveCardFromHandBySelect(CardInfo info)
+    {
+        var target = transform.position;
+        foreach (var slot in parent.GetComponentsInChildren<CardSlot>())
+        {
+            var card = slot.cardVisual;
+            var cardInfo = card.GetComponentInChildren<CardVisualize>().cardInfo;
+            if (cardInfo == info)
+            {
+                card.parentCardSlot = null;
+                //Destroy(slot.transform.parent.gameObject);
+                //Destroy(card.gameObject,moveTime);
+            }
+        }
+        UpdateHandView();
+    }
 
     public void RemoveAllCardFromHand()
     {
