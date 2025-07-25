@@ -97,6 +97,7 @@ public class GameManager : Singleton<GameManager>
         set
         {
             turn = value;
+            Day++;
             if (turnInDay == turn)
             {
                 Day++;
