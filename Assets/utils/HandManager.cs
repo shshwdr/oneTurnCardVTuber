@@ -471,10 +471,13 @@ public class HandManager : Singleton<HandManager>
         discardedInBattle.Clear();
         EventPool.Trigger("DrawHand");
     }
-    public void AddCard(CardInfo info)
+    public void AddCard(CardInfo info,bool resetElement = true)
     {
         var copied = info.ShallowCopy();
-        copied.element1 = Random.Range(0, ElementManager.Instance.sprites.Count);
+        if (resetElement)
+        {
+            copied.element1 = Random.Range(0, ElementManager.Instance.sprites.Count);
+        }
         ownedCards.Add(copied);
         EventPool.Trigger("HandUpdate");
     }

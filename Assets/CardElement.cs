@@ -11,19 +11,19 @@ public class CardElement : MonoBehaviour
     public Image element1Img;
     public Image element2Img;
     // Start is called before the first frame update
-    public void Init()
-    {
-        List<int> elements = new List<int>();
-        for (int i = 0; i < ElementManager.Instance.sprites.Count; i++)
-        {
-            elements.Add(i);
-        }
-
-        element1 = elements.PickItem();
-        element2 = elements.PickItem();
-        // element1Img.sprite = ElementManager.Instance.sprites[element1];
-        // element2Img.sprite = ElementManager.Instance.sprites[element2];
-    }
+    // public void Init()
+    // {
+    //     List<int> elements = new List<int>();
+    //     for (int i = 0; i < ElementManager.Instance.sprites.Count; i++)
+    //     {
+    //         elements.Add(i);
+    //     }
+    //
+    //     element1 = elements.PickItem();
+    //     element2 = elements.PickItem();
+    //     // element1Img.sprite = ElementManager.Instance.sprites[element1];
+    //     // element2Img.sprite = ElementManager.Instance.sprites[element2];
+    // }
 
     public void UpdateView(CardInfo info)
     {

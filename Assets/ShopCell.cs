@@ -13,23 +13,25 @@ public class ShopCell : MonoBehaviour
     
     public void Init(CardInfo info)
     {
+        info.element1 = Random.Range(0, ElementManager.Instance.sprites.Count);
         cardVisualize.Init(info);
 
         buyButton.GetComponentInChildren<TMP_Text>().text = info.cost+$"<sprite name=\"Money\">";
-        buyButton.interactable = GameManager.Instance.CurrentTotalValue >= info.cost;
+        buyButton.interactable = GameManager.Instance.Gold >= info.cost;
         UpdateCell();
         buyButton.onClick.RemoveAllListeners();
         buyButton.onClick.AddListener(() =>
         {
             FindObjectOfType<ShopMenu>().purchased.Add(info.identifier);
-            HandManager.Instance.AddCard(info);
-            GameManager.Instance.CurrentTotalValue -= info.cost;
+            HandManager.Instance.AddCard(info,false);
+            GameManager.Instance.Gold -= info.cost;
             FindObjectOfType<ShopMenu>().UpdateMenu();
             //FindObjectOfType<ShopMenu>().Hide();
             //GameManager.Instance.Next();
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_buy_joker");
             
         });
+        
     }
 
     public void UpdateCell()
@@ -45,7 +47,7 @@ public class ShopCell : MonoBehaviour
             }
             else
             {
-                var interactable = GameManager.Instance.CurrentTotalValue >= ((ItemInfo)(itemIcon.info)).cost;
+                var interactable = GameManager.Instance.Gold >= ((ItemInfo)(itemIcon.info)).cost;
                 buyButton.interactable = interactable;
                 buyButton.GetComponentInChildren<TMP_Text>().color = interactable?Color.black:Color.red;
             }
@@ -60,7 +62,7 @@ public class ShopCell : MonoBehaviour
             else
             {
                 
-                var interactable = GameManager.Instance.CurrentTotalValue >= cardVisualize.cardInfo.cost;
+                var interactable = GameManager.Instance.Gold >= cardVisualize.cardInfo.cost;
                 buyButton.interactable = interactable;
                 buyButton.GetComponentInChildren<TMP_Text>().color = interactable?Color.black:Color.red;
             }
@@ -73,13 +75,13 @@ public class ShopCell : MonoBehaviour
             Resources.Load<Sprite>("item/" + info.image);
         UpdateCell();
         buyButton.GetComponentInChildren<TMP_Text>().text = info.cost+$"<sprite name=\"Money\">";
-        buyButton.interactable = GameManager.Instance.CurrentTotalValue >= info.cost;
+        buyButton.interactable = GameManager.Instance.Gold >= info.cost;
         buyButton.onClick.RemoveAllListeners();
         buyButton.onClick.AddListener(() =>
         {
             FindObjectOfType<ShopMenu>().purchased.Add(info.identifier);
             ItemManager.Instance.AddItem(info);
-            GameManager.Instance.CurrentTotalValue -= info.cost;
+            GameManager.Instance.Gold -= info.cost;
             //GameManager.Instance.Next();
 
             FindObjectOfType<ShopMenu>().UpdateMenu();

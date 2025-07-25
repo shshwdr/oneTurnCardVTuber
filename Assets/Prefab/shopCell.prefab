@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardVisualize: {fileID: 2231251786931269274}
   buyButton: {fileID: 1017951412607930862}
+  itemIcon: {fileID: 0}
 --- !u!1001 &6748394962585811730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126,7 +127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2707854561875091602, guid: 37b0fbe9dfa633142872982bc5aef662, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -28
+      value: -134
       objectReference: {fileID: 0}
     - target: {fileID: 2707854561875091602, guid: 37b0fbe9dfa633142872982bc5aef662, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

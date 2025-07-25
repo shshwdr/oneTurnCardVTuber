@@ -385,6 +385,9 @@ public class GameManager : Singleton<GameManager>
     public void StartNewDay()
     {
         levelInfo = CSVLoader.Instance.levelInfos[day - 1];
+        CurrentTotalValue = 0;
+        targetIndex = 0;
+        cardInfo = null;
         BaseValue = 1;
         MultiplyValue = 1;
         isLevelFinished = false;

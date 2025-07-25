@@ -206,6 +206,8 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
     {
         isInShop = true;
         GetComponent<Image>().enabled = false;
+        highlight.SetActive(false);
+        disable.SetActive(false);
     }
     public void OnPlace()
     {
