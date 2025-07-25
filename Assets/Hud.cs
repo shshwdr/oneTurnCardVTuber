@@ -8,6 +8,8 @@ public class Hud : Singleton<Hud>
 {
     public Transform industryMeter;
     public Transform natureMeter;
+    public Transform totalMeter;
+    public Transform boosterMeter;
 
     public TMP_Text calculateForDayText;
 

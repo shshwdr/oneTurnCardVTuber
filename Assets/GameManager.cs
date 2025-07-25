@@ -190,6 +190,8 @@ public class GameManager : Singleton<GameManager>
                 // info.element2 == element2)
             {
                 boost++;
+                
+                DamageNumbersManager.Instance.ShowResourceCollection(Hud.Instance.boosterMeter, 1, DamageNumberType.industry);
             }
             else
             {
@@ -209,6 +211,9 @@ public class GameManager : Singleton<GameManager>
         currentTotalValue += value;
         EventPool.Trigger("Calculate");
         StartCoroutine(afterCalculate(info));
+        
+        
+        DamageNumbersManager.Instance.ShowResourceCollection(Hud.Instance.totalMeter, value, DamageNumberType.industry);
     }
 
     // public int element1 = -1;
@@ -261,8 +266,8 @@ public class GameManager : Singleton<GameManager>
         get => baseValue;
         set
         {
-            // if(value!=baseValue)
-            // DamageNumbersManager.Instance.ShowResourceCollection(Hud.Instance.industryMeter, value-baseValue, DamageNumberType.industry);
+             if(value!=baseValue)
+             DamageNumbersManager.Instance.ShowResourceCollection(Hud.Instance.industryMeter, value-baseValue, DamageNumberType.industry);
             var diff = value - baseValue;
             // if (diff < 0)
             // {
@@ -299,8 +304,8 @@ public class GameManager : Singleton<GameManager>
         get => multiplyValue;
         set
         {
-            // if(value!=multiplyValue)
-            // DamageNumbersManager.Instance.ShowResourceCollection( Hud.Instance.natureMeter, value - multiplyValue, DamageNumberType.nature);
+             if(value!=multiplyValue)
+             DamageNumbersManager.Instance.ShowResourceCollection( Hud.Instance.natureMeter, value - multiplyValue, DamageNumberType.nature);
             var diff = value - multiplyValue;
             // if (diff < 0)
             // {

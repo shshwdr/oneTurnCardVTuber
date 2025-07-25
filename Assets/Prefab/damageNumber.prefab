@@ -148,4 +148,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   label: {fileID: 6621054871455225346}
-  jumpHeight: 100
+  jumpHeight: 0.1

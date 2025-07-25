@@ -18,7 +18,7 @@ public class DamageNumber : MonoBehaviour
         {
             case (DamageNumberType.industry):
             {
-                label.color = Color.grey;
+                label.color = Color.green;
                 break;
             }
             case (DamageNumberType.nature):

@@ -68,6 +68,7 @@ public class DamageNumbersManager : Singleton<DamageNumbersManager>
                    return;
                }
                go.transform.position = resourceFlyObjData.trans.position;
+               go.transform.position -= 0.1f * Vector3.up;
                go.GetComponent<DamageNumber>().Init(resourceFlyObjData);
            }
             resourceFlyObjDatas.RemoveAt(0);
