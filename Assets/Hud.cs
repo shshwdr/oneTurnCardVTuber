@@ -26,6 +26,7 @@ public class Hud : Singleton<Hud>
         EventPool.OptIn("TurnChanged",UpdateText);
         EventPool.OptIn("EnergyChanged",UpdateText);
         EventPool.OptIn("HandUpdate",UpdateText);
+        EventPool.OptIn("SelectCardFinished",UpdateText);
         EventPool.OptIn("DrawHand",UpdateText);
         EventPool.OptIn("CurrentTotalValueChanged",UpdateText);
         EventPool.OptIn("DayChanged",UpdateText);

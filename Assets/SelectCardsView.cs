@@ -88,7 +88,7 @@ public class SelectCardsView : MenuBase
 
         Hide();
         GameManager.Instance.CheckPlayableAfterPlay();
-        EventPool.Trigger("Calculate");
+        EventPool.Trigger("SelectCardFinished");
     }
 
     public void tryRemove(CardSlot slotT)

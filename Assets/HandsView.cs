@@ -60,6 +60,7 @@ public class HandsView : Singleton<HandsView>
         EventPool.OptIn("BaseValueChanged", UpdateHandView);
         EventPool.OptIn("MultiplyValueChanged", UpdateHandView);
         EventPool.OptIn("Calculate", UpdateHandView);
+        EventPool.OptIn("SelectCardFinished", UpdateHandView);
         EventPool.OptIn("AfterCalculate", UpdateHandView);
     }
 

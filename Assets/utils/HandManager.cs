@@ -78,6 +78,10 @@ public class HandManager : Singleton<HandManager>
             }
             string action = info.actions[i];
 
+            if (action == "when")
+            {
+                break;
+            }
 
             switch (info.actions[i])
             {
@@ -107,7 +111,7 @@ public class HandManager : Singleton<HandManager>
                 {
                     i++;
                     int value = int.Parse(info.actions[i]);
-
+                    value = valueAddBuff(info.buff,info.actions[i-1], value);
                     GameManager.Instance.BaseValue += value;
                     FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_industry_card");
                     break;
@@ -116,6 +120,7 @@ public class HandManager : Singleton<HandManager>
                 {
                     i++;
                     int value = int.Parse(info.actions[i]);
+                    value = valueAddBuff(info.buff,info.actions[i-1], value);
 
                     GameManager.Instance.MultiplyValue += value;
                     FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_industry_card");
@@ -157,6 +162,7 @@ public class HandManager : Singleton<HandManager>
                     i++;
                     
                     int value = int.Parse(info.actions[i]);
+                    value = valueAddBuff(info.buff,key, value);
                     foreach (var cardInfo in HandManager.Instance.handInBattle)
                     {
                         cardInfo.addBuff(key,value);
@@ -177,6 +183,13 @@ public class HandManager : Singleton<HandManager>
                 {
                     GameManager.Instance.Calculate(info);
                     GameManager.Instance.Calculate(info);
+                    break;
+                }
+                case "exchangeBaseAndMult":
+                {
+                    var temp = GameManager.Instance.BaseValue;
+                    GameManager.Instance.BaseValue = GameManager.Instance.MultiplyValue;
+                    GameManager.Instance.MultiplyValue = temp;
                     break;
                 }
                 
@@ -203,7 +216,10 @@ public class HandManager : Singleton<HandManager>
                         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_neutral_card");
                         break;
                 }
-                
+                case "when":
+                {
+                    break;
+                }
         }
         }
 
@@ -263,6 +279,16 @@ public class HandManager : Singleton<HandManager>
         }
     }
 
+   int valueAddBuff(Dictionary<string, int> buff, string key ,int value)
+   {
+        if (buff.ContainsKey(key))
+        {
+            var buffValue = buff[key];
+            value+=buffValue;
+        }
+
+        return value;
+   }
    public void removeEnergy(CardInfo info)
    {
        
@@ -347,6 +373,34 @@ public class HandManager : Singleton<HandManager>
         {
             discardedInBattle.Add(info);
             HandsView.Instance.RemoveCardFromHand(info, RemoveFromHandType.toDiscard);
+        }
+
+        foreach (var handCard in handInBattle)
+        {
+            if (handCard.actions.Count>2 && handCard.actions[0] == "when" && handCard.actions[1] == "discard")
+            {
+                switch (handCard.actions[2])
+                {
+                    case "base":
+                    {
+                        int value = int.Parse(handCard.actions[3]);
+                        value = valueAddBuff(handCard.buff,handCard.actions[3-1], value);
+                        GameManager.Instance.BaseValue += value;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_industry_card");
+                        break;
+                    }
+                    case "multiplier":
+                    {
+                        int value = int.Parse(handCard.actions[3]);
+                        value = valueAddBuff(handCard.buff,handCard.actions[3-1], value);
+
+                        GameManager.Instance.MultiplyValue += value;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_industry_card");
+                        break;
+                    }
+                }
+               
+            }
         }
     }
     public void DiscardCards(int count)
