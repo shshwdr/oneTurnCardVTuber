@@ -16,7 +16,7 @@ public class ShopMenu : MenuBase
     public TMP_Text goldText;
 
     public Button refreshButton;
-    private int refreshCost = 2;
+    private int refreshCost = 1;
     void Refresh()
     {
         if (GameManager.Instance.Gold >= refreshCost)

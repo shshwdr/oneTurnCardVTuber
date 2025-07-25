@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Pool;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum SelectCardsViewType{Discard, Return}
+public enum SelectCardsViewType{Discard, Return,RemoveEnergy}
 public class SelectCardsView : MenuBase
 {
     public Button confirmButton;
@@ -32,6 +33,8 @@ public class SelectCardsView : MenuBase
     public void Show(int count, SelectCardsViewType type)
     {
         visuals.Clear();
+
+        count = math.min(count, HandManager.Instance.handInBattle.Count);
         this.count = count;
         this.type = type;
         Show();
@@ -68,6 +71,7 @@ public class SelectCardsView : MenuBase
         foreach (var card in visuals.Values)
         {
             var info = card.GetComponentInChildren<CardVisualize>().cardInfo;
+            card.isSelected = false;
             switch (type)
             {
                  case  SelectCardsViewType.Discard:
@@ -76,12 +80,15 @@ public class SelectCardsView : MenuBase
                 case SelectCardsViewType.Return:
                     HandManager.Instance.ReturnCard(info);
                     break;
+                case SelectCardsViewType.RemoveEnergy:
+                    HandManager.Instance.removeEnergy(info);
+                    break;
             }
         }
 
         Hide();
         GameManager.Instance.CheckPlayableAfterPlay();
-        EventPool.Trigger("HandUpdate");
+        EventPool.Trigger("Calculate");
     }
 
     public void tryRemove(CardSlot slotT)

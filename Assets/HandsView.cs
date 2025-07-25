@@ -55,7 +55,6 @@ public class HandsView : Singleton<HandsView>
         //UpdatePileNumber();
         EventPool.OptIn("HandUpdate", UpdatePileNumber);
         EventPool.OptIn("EnergyChanged", UpdateHandView);
-        EventPool.OptIn("EnergyChanged", UpdateHandView);
         
         
         EventPool.OptIn("BaseValueChanged", UpdateHandView);

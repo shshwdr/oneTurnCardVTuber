@@ -95,13 +95,7 @@ public class HandManager : Singleton<HandManager>
                 {
                     i++;
                     int value = int.Parse(info.actions[i]);
-                    var cardWithEnergy = HandManager.Instance.handInBattle.Where(x => x.energy > 0).ToList();
-                    cardWithEnergy.Shuffle();
-                    for (int a = 0; a < math.min(value, cardWithEnergy.Count); a++)
-                    {
-                        cardWithEnergy[a].energy = 0;
-                    }
-                    
+                    FindObjectOfType<SelectCardsView>(). Show(value, SelectCardsViewType.RemoveEnergy);
                     break;
                 }
                 case "addBaseEqualToEnergy":
@@ -269,6 +263,12 @@ public class HandManager : Singleton<HandManager>
         }
     }
 
+   public void removeEnergy(CardInfo info)
+   {
+       
+       info.energy = 0;
+
+   }
     public int effectiveNatureBoost()
     {
         
