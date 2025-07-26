@@ -6,19 +6,19 @@ identifier,synergyList,actions,energy,types,start,startBK,title,desc,canDraw,exh
 4,return,returnCard|2,3,industry,1,1,Preparation Time,return {0} cards to deck,1,0,0,industry,3,4 normal,4 magic,5,2,lotsCards,,
 5,discard,discard|1|attackD,0,nature,1,1,Industry Work,discard {0} card and gain tips twice,1,0,0,nature,3,5 smile with close eye,5 magic fail,6,2,final,,
 6,,multiplier|3,2,industry,2,2,Mood Lift, +{0} vibe,0,0,0,industry,3,6 shock,6 magic rabbit,5,1,buff,,
-changeAllToLast,boost,changeAllToLast|discard|1,0,industry,0,0,,discard {0} card and change cards in hand to last element,1,,,industry,3,,,,4,,1,star
-9,boost,clearLastCard,0,industry,1,1,restart topic,this card can be treat as any element,1,0,0,industry,3,7. worry,,,4,,,
-whenDiscard,discard,when|discard|base|2,0,industry,,,,"when discard a card, add {0} base value",1,,,industry,3,,,,,,,
-10,lotsCards,addBaseEqualToEnergy,0,industry,,0,,add base value equal to energy,1,,,industry,3,,,,,,,star
-11,lotsCards,addCard|bad|4,2,industry,,0,,add {0} bad card to deck,1,,,industry,3,,,,,boost: increase boost and use that to increase viewers and vibe.,,
+changeAllToLast,boost,changeAllToLast|discard|1,0,industry,0,0,Topic Shift,discard {0} card and change cards in hand to last element,1,,,industry,3,,,,4,,1,star
+9,boost,clearLastCard,0,industry,1,1,Change topic,this card can be treat as any element,1,0,0,industry,3,7. worry,,,4,,,
+whenDiscard,discard,when|discard|base|2,0,industry,,,Steady Viewer Rise,"when discard a card, add {0} base value",1,,,industry,3,,,,,,,
+10,lotsCards,addBaseEqualToEnergy,0,industry,,0,Loyal Followers,add base value equal to energy,1,,,industry,3,,,,,,,star
+11,lotsCards,addCard|bad|4,2,industry,,0,All-In Moment,add {0} bad card to deck,1,,,industry,3,,,,,boost: increase boost and use that to increase viewers and vibe.,,
 bad,,base|-1,1,industry,,0,Dead Air,Dead Air,0,,,industry,3,,,,,exchange: exchange or increase vibe by decrease viewers and make the final value large,,
 12,buff,addBuff|base|6,2,industry,,0,Clickbait Title,"all cards in hand that would change viewers, increase {0}",1,,,industry,3,,,,,discard: get benefit when discard card,,
 13,buff,addBuff|multiplier|2,2,industry,,0,Exclusive Scoop,"all cards in hand that would change vibe, increase {0}",1,,,industry,3,,,,,return: get benefit when add card to deck,,
-boosterToMultiplier,boost,boosterToMultiplier,1,industry,,0,,add boost value to multiplier,1,,,industry,3,,,,,lotsCards: make your deck huge and get benefit,1,magic
+boosterToMultiplier,boost,boosterToMultiplier,1,industry,,0,"	Hype Party",add boost value to multiplier,1,,,industry,3,,,,,lotsCards: make your deck huge and get benefit,1,magic
 balance,exchange,base|-5|multiplier|5,2,industry,,0,Balance, {0} viewers and +{1} vibe,1,,,industry,3,,,,,final: increase viewers and vibe and at last get tips lots of times to get high final result.,,
 exchange,exchange,exchangeBaseAndMult|discard|2,1,industry,,,Exchange ,discard {0} and exchange viewers and vibe value,1,,,industry,3,,,,6,buff: add buff(increase value of viewers or vibe) a lot and get benefit.,,magic
-doubleBoost,boost,doubleBoost,2,industry,,,,double current boost,1,,,industry,3,,,,,,,magic
-24,,removeEnergy|2,2,industry,0,0,,make energy of {0} cards to 0,1,,,industry,3,,,,,,,magic
+doubleBoost,boost,doubleBoost,2,industry,,,Hot Topic,double current boost,1,,,industry,3,,,,,,,magic
+24,,removeEnergy|2,2,industry,0,0,Energized,make energy of {0} cards to 0,1,,,industry,3,,,,,,,magic
 22,final,"discard all card but one, that one play 5 times",0,industry,,,,,,,,industry,3,,,,,,,
 ,,"when this card is discard, ",,,,,,,,,,,,,,,,,,
 23,,base += energy in hand,,industry,,,,,,,,industry,3,,,,,,,
