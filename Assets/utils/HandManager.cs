@@ -109,6 +109,11 @@ public class HandManager : Singleton<HandManager>
                     GameManager.Instance.BaseValue += GameManager.Instance.Energy;
                     break;
                 }
+                case "doubleBoost":
+                {
+                    GameManager.Instance.boost *= 2;
+                    break;
+                }
                 case "base":
                 {
                     i++;

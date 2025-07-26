@@ -13,6 +13,7 @@ public class CalculateView : MonoBehaviour
     public TMP_Text valueText;
     public TMP_Text currentTotalValueText;
     public TMP_Text targetTotalValueText;
+    public TMP_Text levelText;
     public Image element1Img;
     public Image element2Img;
     public CardVisualize cardVisualize;
@@ -32,8 +33,9 @@ public class CalculateView : MonoBehaviour
         baseValueText.text = GameManager.Instance.BaseValue.ToString();
         multiplyValueText.text = GameManager.Instance.MultiplyValue.ToString();
         valueText.text = "="+(GameManager.Instance.BaseValue * GameManager.Instance.MultiplyValue).ToString();
-        currentTotalValueText.text = GameManager.Instance.CurrentTotalValue.ToString() +"/"+GameManager.Instance.TargetValue+ " - "+GameManager.Instance.TargetLevel;
-        targetTotalValueText.text = "1000";
+        currentTotalValueText.text = GameManager.Instance.CurrentTotalValue.ToString();
+        targetTotalValueText.text = GameManager.Instance.TargetValue.ToString();
+        levelText.text = "RewardLevel: "+GameManager.Instance.TargetLevel;
         updateElement();
     }
     public void UpdateViewResetValue()
@@ -43,8 +45,9 @@ public class CalculateView : MonoBehaviour
         multiplyValueText.text = GameManager.Instance.MultiplyValue.ToString();
         valueText.text = "="+(GameManager.Instance.BaseValue * GameManager.Instance.MultiplyValue).ToString();
         //valueText.text = (GameManager.Instance.BaseValue * GameManager.Instance.MultiplyValue).ToString();
-        currentTotalValueText.text = GameManager.Instance.CurrentTotalValue.ToString() +"/"+GameManager.Instance.TargetValue+ " - "+GameManager.Instance.TargetLevel;
-        targetTotalValueText.text = "1000";
+        currentTotalValueText.text = GameManager.Instance.CurrentTotalValue.ToString();
+        targetTotalValueText.text = GameManager.Instance.TargetValue.ToString();
+        levelText.text = "RewardLevel: "+GameManager.Instance.TargetLevel;
         updateElement();
     }
     
@@ -54,8 +57,9 @@ public class CalculateView : MonoBehaviour
         baseValueText.text = GameManager.Instance.BaseValue.ToString();
         multiplyValueText.text = GameManager.Instance.MultiplyValue.ToString();
         valueText.text = "="+(GameManager.Instance.BaseValue * GameManager.Instance.MultiplyValue).ToString();
-        currentTotalValueText.text = GameManager.Instance.CurrentTotalValue.ToString() +"/"+GameManager.Instance.TargetValue+ " - "+GameManager.Instance.TargetLevel;
-        targetTotalValueText.text = "1000";
+        currentTotalValueText.text = GameManager.Instance.CurrentTotalValue.ToString();
+        targetTotalValueText.text = GameManager.Instance.TargetValue.ToString();
+        levelText.text = "RewardLevel: "+GameManager.Instance.TargetLevel;
         updateElement();
     }
 

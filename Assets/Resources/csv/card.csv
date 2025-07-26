@@ -12,19 +12,19 @@ whenDiscard,discard,when|discard|base|2,0,industry,,,,"when discard a card, add 
 10,lotsCards,addBaseEqualToEnergy,0,industry,,0,,add base value equal to energy,1,,,industry,3,,,,,,,star
 11,lotsCards,addCard|bad|4,2,industry,,0,,add {0} bad card to deck,1,,,industry,3,,,,,boost: increase boost and use that to increase viewers and vibe.,,
 bad,,base|-1,1,industry,,0,Dead Air,Dead Air,0,,,industry,3,,,,,exchange: exchange or increase vibe by decrease viewers and make the final value large,,
-12,buff,addBuff|base|3,2,industry,,0,Clickbait Title,"all cards in hand that would change viewers, increase {0}",1,,,industry,3,,,,,discard: get benefit when discard card,,
-13,buff,addBuff|multiplier|1,2,industry,,0,Exclusive Scoop,"all cards in hand that would change vibe, increase {0}",1,,,industry,3,,,,,return: get benefit when add card to deck,,
+12,buff,addBuff|base|6,2,industry,,0,Clickbait Title,"all cards in hand that would change viewers, increase {0}",1,,,industry,3,,,,,discard: get benefit when discard card,,
+13,buff,addBuff|multiplier|2,2,industry,,0,Exclusive Scoop,"all cards in hand that would change vibe, increase {0}",1,,,industry,3,,,,,return: get benefit when add card to deck,,
 boosterToMultiplier,boost,boosterToMultiplier,1,industry,,0,,add boost value to multiplier,1,,,industry,3,,,,,lotsCards: make your deck huge and get benefit,1,magic
 balance,exchange,base|-5|multiplier|5,2,industry,,0,Balance, {0} viewers and +{1} vibe,1,,,industry,3,,,,,final: increase viewers and vibe and at last get tips lots of times to get high final result.,,
 exchange,exchange,exchangeBaseAndMult|discard|2,1,industry,,,Exchange ,discard {0} and exchange viewers and vibe value,1,,,industry,3,,,,6,buff: add buff(increase value of viewers or vibe) a lot and get benefit.,,magic
-superBalance,exchange,baseD|2|multiplierM|2,,industry,,,Super Balance,,0,,,industry,3,,,,,,,
+doubleBoost,boost,doubleBoost,2,industry,10,,,double current boost,1,,,industry,3,,,,,,,magic
 24,,removeEnergy|2,2,industry,0,0,,make energy of {0} cards to 0,1,,,industry,3,,,,,,,magic
-22,final,"discard all card but one, that one play 5 times",2,industry,,,,,,,,industry,3,,,,,,,
+22,final,"discard all card but one, that one play 5 times",0,industry,,,,,,,,industry,3,,,,,,,
+,,"when this card is discard, ",,,,,,,,,,,,,,,,,,
 23,,base += energy in hand,,industry,,,,,,,,industry,3,,,,,,,
 25,,Back to max,,industry,,,,get base back to max ({0}),,,,industry,3,,,,,,,
 26,,change trend topic,,industry,,,,,,,,industry,3,,,,,,,
 14,,discard and doubleBase,2,industry,,,,,,,,industry,3,,,,,,,
-15,,doubleAttack,,industry,,,,,,,,industry,3,,,,,,,
 16,,whenDeckSizeSmallDoSomething,,industry,,,,,,,,industry,3,,,,,,,
 whenReturn,,whenReturn|addBase|2,,industry,,,,,,,,industry,3,,,,,,,
 18,,whenLastIsBase|addBase|2,,industry,,,,,,,,industry,3,,,,,,,
@@ -33,4 +33,5 @@ whenReturn,,whenReturn|addBase|2,,industry,,,,,,,,industry,3,,,,,,,
 21,,"add x base and attack,x equals to card played before",,industry,,,,,,,,industry,3,,,,,,,
 ,,"drag three card, all cost set to 0",,industry,,,,,,,,industry,3,,,,,,,
 ,lotsCards,discard x cards in deck and double mult,,,,,,,,,,industry,3,,,,,,,
+superBalance,exchange,baseD|2|multiplierM|2,,industry,,,Super Balance,,0,,,industry,3,,,,,,,
 7,,base|2,2,industry,0,1,Audience Growth, +{0} viewers,0,0,0,industry,3,7. worry,,5,1,,,

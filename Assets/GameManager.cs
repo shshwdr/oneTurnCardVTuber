@@ -178,7 +178,7 @@ public class GameManager : Singleton<GameManager>
 
     private LevelInfo levelInfo;
     public LevelInfo LevelInfo => levelInfo!=null ? levelInfo:CSVLoader.Instance.levelInfos[0];
-    public string TargetLevel =>targetIndex==0?"":"Lv."+targetIndex;
+    public string TargetLevel =>targetIndex.ToString();
     public int Reward => LevelInfo.rewards[targetIndex-1];
 
     public int boost = 0;
