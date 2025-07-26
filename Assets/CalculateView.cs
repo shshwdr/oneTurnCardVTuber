@@ -31,7 +31,7 @@ public class CalculateView : MonoBehaviour
         boostValueText.text = GameManager.Instance.boost.ToString();
         baseValueText.text = GameManager.Instance.BaseValue.ToString();
         multiplyValueText.text = GameManager.Instance.MultiplyValue.ToString();
-        valueText.text = "";//(GameManager.Instance.BaseValue * GameManager.Instance.MultiplyValue).ToString();
+        valueText.text = "="+(GameManager.Instance.BaseValue * GameManager.Instance.MultiplyValue).ToString();
         currentTotalValueText.text = GameManager.Instance.CurrentTotalValue.ToString() +"/"+GameManager.Instance.TargetValue+ " - "+GameManager.Instance.TargetLevel;
         targetTotalValueText.text = "1000";
         updateElement();
@@ -42,7 +42,7 @@ public class CalculateView : MonoBehaviour
         baseValueText.text = GameManager.Instance.BaseValue.ToString();
         multiplyValueText.text = GameManager.Instance.MultiplyValue.ToString();
         valueText.text = "="+(GameManager.Instance.BaseValue * GameManager.Instance.MultiplyValue).ToString();
-        valueText.text = "";//(GameManager.Instance.BaseValue * GameManager.Instance.MultiplyValue).ToString();
+        //valueText.text = (GameManager.Instance.BaseValue * GameManager.Instance.MultiplyValue).ToString();
         currentTotalValueText.text = GameManager.Instance.CurrentTotalValue.ToString() +"/"+GameManager.Instance.TargetValue+ " - "+GameManager.Instance.TargetLevel;
         targetTotalValueText.text = "1000";
         updateElement();

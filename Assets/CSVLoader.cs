@@ -30,6 +30,7 @@ public class CardInfo
     public int element1;
     public int element2;
     public bool lateCalculateBoost;
+    public string effect;
     public bool alwaysElementSafe;
     public Dictionary<string, int> buff;
     public CardInfo ShallowCopy()

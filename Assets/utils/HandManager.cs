@@ -38,7 +38,7 @@ public class HandManager : Singleton<HandManager>
         }
         EventPool.Trigger("DrawHand");
         
-        DoCardAction(info);
+        StartCoroutine( DoCardAction(info));
         
         
         // if (DisasterManager.Instance.buffManager.GetBuffValue("endTurn") > 0 &&
@@ -51,7 +51,7 @@ public class HandManager : Singleton<HandManager>
     }
 
     public CardGameCubism model;
-   public void DoCardAction(CardInfo info)
+   public IEnumerator DoCardAction(CardInfo info)
    {
        if (!info.lateCalculateBoost)
        {
@@ -100,6 +100,8 @@ public class HandManager : Singleton<HandManager>
                     i++;
                     int value = int.Parse(info.actions[i]);
                     FindObjectOfType<SelectCardsView>(). Show(value, SelectCardsViewType.RemoveEnergy);
+                    
+                    yield return new WaitUntil(()=>!FindObjectOfType<SelectCardsView>().isActive);
                     break;
                 }
                 case "addBaseEqualToEnergy":
@@ -131,6 +133,7 @@ public class HandManager : Singleton<HandManager>
                     i++;
                     int value = int.Parse(info.actions[i]);
                     FindObjectOfType<SelectCardsView>().Show( value, SelectCardsViewType.Return);
+                    yield return new WaitUntil(()=>!FindObjectOfType<SelectCardsView>().isActive);
                     //HandsView.Instance.ReturnCard(value);
                     break;
                 }
@@ -208,6 +211,8 @@ public class HandManager : Singleton<HandManager>
                     FindObjectOfType<SelectCardsView>().Show( value, SelectCardsViewType.Discard);
                     //HandsView.Instance.DiscardCards(value);
                         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_neutral_card");
+                        
+                        yield return new WaitUntil(()=>!FindObjectOfType<SelectCardsView>().isActive);
                         break;
                 }
                 case "discardHand":
@@ -223,6 +228,13 @@ public class HandManager : Singleton<HandManager>
         }
         }
 
+        if (info.effect == "star")
+        {
+            SpawnManager.Instance.SpawnStarFall();
+        }else if (info.effect == "magic")
+        {
+            SpawnManager.Instance.SpawnExplosion();
+        }
         if (info.lateCalculateBoost)
         {
            

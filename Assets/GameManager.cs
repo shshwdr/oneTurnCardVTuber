@@ -211,7 +211,11 @@ public class GameManager : Singleton<GameManager>
         var value = BaseValue * MultiplyValue;
         currentTotalValue += value;
         EventPool.Trigger("Calculate");
-        StartCoroutine(afterCalculate(info));
+
+        SpawnManager.Instance.SpawnMoneyRain();
+        
+        updateElement(info);
+       // StartCoroutine(afterCalculate(info));
         
         
         DamageNumbersManager.Instance.ShowResourceCollection(Hud.Instance.totalMeter, value, DamageNumberType.industry);
@@ -232,29 +236,28 @@ public class GameManager : Singleton<GameManager>
         // element1 = info.element1;
         // element2 = info.element2;
     }
-    IEnumerator afterCalculate(CardInfo info)
-    {
-        updateElement(info);
-        yield return new WaitForSeconds(1f);
-
-        // if (cardInfo != null)
-        // {
-        //     if (info.element1 == cardInfo.element1 )//|| info.identifier == cardInfo.identifier)// || info.element2 == element1 ||
-        //        // info.element2 == element2)
-        //     {
-        //         BaseValue += 1;
-        //     }
-        //     else
-        //     {
-        //         // BaseValue = 1;
-        //         // MultiplyValue = 1;
-        //     }
-        // }
-
-        //BaseValue = half(BaseValue);
-        //MultiplyValue = half(MultiplyValue);
-        EventPool.Trigger("AfterCalculate");
-    }
+    // IEnumerator afterCalculate(CardInfo info)
+    // {
+    //     //yield return new WaitForSeconds(1f);
+    //
+    //     // if (cardInfo != null)
+    //     // {
+    //     //     if (info.element1 == cardInfo.element1 )//|| info.identifier == cardInfo.identifier)// || info.element2 == element1 ||
+    //     //        // info.element2 == element2)
+    //     //     {
+    //     //         BaseValue += 1;
+    //     //     }
+    //     //     else
+    //     //     {
+    //     //         // BaseValue = 1;
+    //     //         // MultiplyValue = 1;
+    //     //     }
+    //     // }
+    //
+    //     //BaseValue = half(BaseValue);
+    //     //MultiplyValue = half(MultiplyValue);
+    //     //EventPool.Trigger("AfterCalculate");
+    // }
 
     int half(int v)
     {
