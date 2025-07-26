@@ -6,8 +6,8 @@ identifier,synergyList,actions,energy,types,start,startBK,title,desc,canDraw,exh
 4,return,returnCard|2,3,industry,1,1,Preparation Time,return {0} cards to deck,1,0,0,industry,3,4 normal,4 magic,5,2,lotsCards,,
 5,discard,discard|1|attackD,0,nature,1,1,Industry Work,discard {0} card and gain tips twice,1,0,0,nature,3,5 smile with close eye,5 magic fail,6,2,final,,
 6,,multiplier|3,2,industry,2,2,Mood Lift, +{0} vibe,0,0,0,industry,3,6 shock,6 magic rabbit,5,1,buff,,
-changeAllToLast,boost,changeAllToLast|discard|1,0,industry,0,0,Topic Shift,discard {0} card and change cards in hand to last element,1,,,industry,3,,,,4,,1,star
-9,boost,clearLastCard,0,industry,1,1,Change topic,this card can be treat as any element,1,0,0,industry,3,7. worry,,,4,,,
+changeAllToLast,boost,changeAllToLast|discard|1,0,industry,0,0,Topic Redirect,discard {0} card and change cards in hand to last element,1,,,industry,3,,,,4,,1,star
+9,boost,clearLastCard,0,industry,1,1,Topic Shift,this card can be treat as any element,1,0,0,industry,3,7. worry,,,4,,,
 whenDiscard,discard,when|discard|base|2,0,industry,,,Steady Viewer Rise,"when discard a card, add {0} base value",1,,,industry,3,,,,,,,
 10,lotsCards,addBaseEqualToEnergy,0,industry,,0,Loyal Followers,add base value equal to energy,1,,,industry,3,,,,,,,star
 11,lotsCards,addCard|bad|4,2,industry,,0,All-In Moment,add {0} bad card to deck,1,,,industry,3,,,,,boost: increase boost and use that to increase viewers and vibe.,,
