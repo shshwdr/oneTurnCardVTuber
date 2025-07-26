@@ -17,7 +17,7 @@ bad,,base|-1,1,industry,,0,Dead Air,Dead Air,0,,,industry,3,,,,,exchange: exchan
 boosterToMultiplier,boost,boosterToMultiplier,1,industry,,0,,add boost value to multiplier,1,,,industry,3,,,,,lotsCards: make your deck huge and get benefit,1,magic
 balance,exchange,base|-5|multiplier|5,2,industry,,0,Balance, {0} viewers and +{1} vibe,1,,,industry,3,,,,,final: increase viewers and vibe and at last get tips lots of times to get high final result.,,
 exchange,exchange,exchangeBaseAndMult|discard|2,1,industry,,,Exchange ,discard {0} and exchange viewers and vibe value,1,,,industry,3,,,,6,buff: add buff(increase value of viewers or vibe) a lot and get benefit.,,magic
-doubleBoost,boost,doubleBoost,2,industry,10,,,double current boost,1,,,industry,3,,,,,,,magic
+doubleBoost,boost,doubleBoost,2,industry,,,,double current boost,1,,,industry,3,,,,,,,magic
 24,,removeEnergy|2,2,industry,0,0,,make energy of {0} cards to 0,1,,,industry,3,,,,,,,magic
 22,final,"discard all card but one, that one play 5 times",0,industry,,,,,,,,industry,3,,,,,,,
 ,,"when this card is discard, ",,,,,,,,,,,,,,,,,,
