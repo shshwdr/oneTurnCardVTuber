@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Pool;
@@ -21,6 +22,7 @@ public class TutorialManager : Singleton<TutorialManager>
     {
         //mainTutorialMenu = GameObject.Find("MainTutorial").GetComponent<TutorialMenu>();
     }
+
 
     // public void checkRefreshTutorial()
     // {

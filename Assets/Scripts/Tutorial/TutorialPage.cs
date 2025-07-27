@@ -50,16 +50,16 @@ public class TutorialPage : MonoBehaviour
             dialogue.GetComponent<CanvasGroup>().DOFade(1, 0.5f).SetEase( Ease.InQuad);
             
             
-            if (menu.tutorialKey.Length > 0 )
-            {
-                var term = menu.tutorialKey + "_" + index;
-                dialogue.GetComponent<DialogueCell>().text.text = term;
-                
-            }
-            else
-            {
-                Debug.LogError("tutorial key is empty");
-            }
+            // if (menu.tutorialKey.Length > 0 )
+            // {
+            //     var term = menu.tutorialKey + "_" + index;
+            //     dialogue.GetComponent<DialogueCell>().text.text = term;
+            //     
+            // }
+            // else
+            // {
+            //     Debug.LogError("tutorial key is empty");
+            // }
         }
         
         // a hack way
@@ -136,7 +136,7 @@ public class TutorialPage : MonoBehaviour
             }
             canv.overrideSorting = true;
             canv.sortingOrder = 10000;
-            canv.sortingLayerName = "UI";
+            canv.sortingLayerName = "ui";
             canvases.Add(canv);
             foreach (TMP_Text tex in obj.GetComponentsInChildren<TMP_Text>())
             {
@@ -221,6 +221,8 @@ public class TutorialPage : MonoBehaviour
                 obj.GetComponentInChildren<Button>().onClick.AddListener(gotoNextPage);
             }
         }
+        
+        
     }
     public void gotoNextPage()
     {
@@ -244,15 +246,16 @@ public class TutorialPage : MonoBehaviour
         {
             if (canv)
             {
-                if (canv.GetComponent<GraphicRaycaster>())
-                {
-                    Destroy(canv.GetComponent<GraphicRaycaster>());
-                }
-
-                if (destoryCanv)
-                {
-                    Destroy(canv);
-                }
+                // if (canv.GetComponent<GraphicRaycaster>())
+                // {
+                //     Destroy(canv.GetComponent<GraphicRaycaster>());
+                // }
+                //
+                // if (destoryCanv)
+                // {
+                //     Destroy(canv);
+                // }
+                canv.overrideSorting = false;
             }
         }
         
