@@ -197,15 +197,39 @@ public class GameManager : Singleton<GameManager>
            // boost++;
         }
     }
-    
+    float MapValue(float x)
+    {
+        if (x >= 1f && x < 10f)
+        {
+            return Mathf.Lerp(1f, 10f, (x - 1f) / (10f - 1f));
+        }
+        else if (x >= 10f && x < 100f)
+        {
+            return Mathf.Lerp(10f, 50f, (x - 10f) / (100f - 10f));
+        }
+        else if (x >= 100f && x < 500f)
+        {
+            return Mathf.Lerp(50f, 100f, (x - 100f) / (500f - 100f));
+        }
+        else if (x >= 500f && x <= 2000f)
+        {
+            return Mathf.Lerp(100f, 200f, (x - 500f) / (2000f - 500f));
+        }
+        else
+        {
+            // 超出范围时可选择 clamp 或报错
+            return 300;
+        }
+    }
     public void Calculate(CardInfo info)
     {
         BaseValue+=boost;
         var value = BaseValue * MultiplyValue;
         currentTotalValue += value;
         EventPool.Trigger("Calculate");
-
-        SpawnManager.Instance.SpawnMoneyRain();
+        int v =(int) MapValue(value);
+        Debug.Log("map value "+value+" "+v);
+        SpawnManager.Instance.SpawnMoneyRain(v);
         
         updateElement(info);
        // StartCoroutine(afterCalculate(info));

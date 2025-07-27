@@ -1,27 +1,27 @@
 identifier,synergyList,actions,energy,types,start,startBK,title,desc,canDraw,exhaust,unlockAt,cardBK,cost,expresslist,animList,expression,motion,synergyList,lateCalculateBoost,effect
 0,,base|3|attack,1,nature,2,2,Viral Appeal, +{0} viewers and gain tips,0,0,0,nature,3,0 blush,0,1,3,boost,,
-1,,multiplier|1|attack,1,nature,2,2,High-Energy Engagement, +{0} vibe and gain tips,0,0,0,nature,3,1 shine in eye,1 doushou,2,3,exchange,,
-2,,attack,0,nature,2,2,Tips Time,gain tips,0,0,0,nature,3,2 wuyu,2 shake,3,3,discard,,
-3,,base|15,2,industry,2,2,New Follower Alert, +{0} viewers,0,0,0,industry,3,3 close eye,3 hat,4,1,return,,
-4,return,returnCard|2,3,industry,1,1,Preparation Time,return {0} cards to deck,1,0,0,industry,3,4 normal,4 magic,5,2,lotsCards,,
+1,,multiplier|1|attack,1,nature,2,2,High-Energy Engagement, +{0} vibe and gain tips,0,0,0,nature,3,1 shine in eye,1 doushou,0,3,exchange,,
+2,,attack,0,nature,2,2,Tips Time,gain tips,0,0,0,nature,3,2 wuyu,2 shake,4,3,discard,,
+3,,base|15,2,industry,2,2,New Follower Alert, +{0} viewers,0,0,0,industry,3,3 close eye,3 hat,1,1,return,,
+6,,multiplier|3,2,industry,2,2,Mood Lift, +{0} vibe,0,0,0,industry,3,6 shock,6 magic rabbit,0,1,buff,,
+4,return,returnCard|2,3,industry,1,1,Preparation Time,return {0} cards to deck,1,0,0,industry,3,4 normal,4 magic,0,2,lotsCards,,
 5,discard,discard|1|attackD,0,nature,1,1,Industry Work,discard {0} card and gain tips twice,1,0,0,nature,3,5 smile with close eye,5 magic fail,6,2,final,,
-6,,multiplier|3,2,industry,2,2,Mood Lift, +{0} vibe,0,0,0,industry,3,6 shock,6 magic rabbit,5,1,buff,,
-changeAllToLast,boost,changeAllToLast|discard|1,0,industry,0,0,Topic Redirect,discard {0} card and change cards in hand to last element,1,,,industry,3,,,,4,,1,star
-9,boost,clearLastCard,0,industry,1,1,Topic Shift,this card can be treat as any element,1,0,0,industry,3,7. worry,,,4,,,
-whenDiscard,discard,when|discard|base|2,0,industry,,,Steady Viewer Rise,"when discard a card, add {0} base value",1,,,industry,3,,,,,,,
-10,lotsCards,addBaseEqualToEnergy,0,industry,,0,Loyal Followers,add base value equal to energy,1,,,industry,3,,,,,,,star
-11,lotsCards,addCard|bad|4,2,industry,,0,All-In Moment,add {0} bad card to deck,1,,,industry,3,,,,,boost: increase boost and use that to increase viewers and vibe.,,
-bad,,base|-1,1,industry,,0,Dead Air,Dead Air,0,,,industry,3,,,,,exchange: exchange or increase vibe by decrease viewers and make the final value large,,
-12,buff,addBuff|base|6,2,industry,,0,Clickbait Title,"all cards in hand that would change viewers, increase {0}",1,,,industry,3,,,,,discard: get benefit when discard card,,
-13,buff,addBuff|multiplier|2,2,industry,,0,Exclusive Scoop,"all cards in hand that would change vibe, increase {0}",1,,,industry,3,,,,,return: get benefit when add card to deck,,
-boosterToMultiplier,boost,boosterToMultiplier,1,industry,,0,"	Hype Party",add boost value to multiplier,1,,,industry,3,,,,,lotsCards: make your deck huge and get benefit,1,magic
-balance,exchange,base|-5|multiplier|5,2,industry,,0,Balance, {0} viewers and +{1} vibe,1,,,industry,3,,,,,final: increase viewers and vibe and at last get tips lots of times to get high final result.,,
-exchange,exchange,exchangeBaseAndMult|discard|2,1,industry,,,Exchange ,discard {0} and exchange viewers and vibe value,1,,,industry,3,,,,6,buff: add buff(increase value of viewers or vibe) a lot and get benefit.,,magic
-doubleBoost,boost,doubleBoost,2,industry,,,Hot Topic,double current boost,1,,,industry,3,,,,,,,magic
-24,,removeEnergy|2,2,industry,0,0,Energized,make energy of {0} cards to 0,1,,,industry,3,,,,,,,magic
+changeAllToLast,boost,changeAllToLast|discard|1,1,industry,0,0,Topic Redirect,discard {0} card and change cards in hand to last element,1,,,industry,3,,,1,4,,1,star
+9,boost,clearLastCard,0,industry,1,1,Topic Shift,this card can be treat as any element,1,0,0,industry,3,7. worry,,0,2,,,
+whenDiscard,discard,when|discard|base|4,0,industry,,,Steady Viewer Rise,"when discard a card, add {0} base value",1,,,industry,3,,,0,5,,,
+10,lotsCards,addBaseEqualToEnergy,1,industry,,0,Loyal Followers,add base value equal to energy,1,,,industry,3,,,5,4,,,star
+11,lotsCards,addCard|bad|4,2,industry,,0,All-In Moment,add {0} bad card to deck,1,,,industry,3,,,2,2,boost: increase boost and use that to increase viewers and vibe.,,
+bad,,base|-1,1,industry,,0,Dead Air,Dead Air,0,,,industry,3,,,7,5,exchange: exchange or increase vibe by decrease viewers and make the final value large,,
+12,buff,addBuff|base|6,2,industry,,0,Clickbait Title,"all cards in hand that would change viewers, increase {0}",1,,,industry,3,,,5,1,discard: get benefit when discard card,,
+13,buff,addBuff|multiplier|2,2,industry,,0,Exclusive Scoop,"all cards in hand that would change vibe, increase {0}",1,,,industry,3,,,0,1,return: get benefit when add card to deck,,
+boosterToMultiplier,boost,boosterToMultiplier,1,industry,,0,"	Hype Party",add boost value to multiplier,1,,,industry,3,,,6,6,lotsCards: make your deck huge and get benefit,1,magic
+balance,exchange,base|-5|multiplier|5,2,industry,,0,Balance, {0} viewers and +{1} vibe,1,,,industry,3,,,1,3,final: increase viewers and vibe and at last get tips lots of times to get high final result.,,
+exchange,exchange,exchangeBaseAndMult|discard|2,1,industry,,,Exchange ,discard {0} and exchange viewers and vibe value,1,,,industry,3,,,1,6,buff: add buff(increase value of viewers or vibe) a lot and get benefit.,,magic
+doubleBoost,boost,doubleBoost,2,industry,,,Hot Topic,double current boost,1,,,industry,3,,,1,6,,,magic
+24,,removeEnergy|2,2,industry,0,0,Energized,make energy of {0} cards to 0,1,,,industry,3,,,5,6,,,magic
 22,final,"discard all card but one, that one play 5 times",0,industry,,,,,,,,industry,3,,,,,,,
 ,,"when this card is discard, ",,,,,,,,,,,,,,,,,,
-23,,base += energy in hand,,industry,,,,,,,,industry,3,,,,,,,
+23,,base += energy in hand,,industry,,,,,,,,industry,3,,,,5,,,
 25,,Back to max,,industry,,,,get base back to max ({0}),,,,industry,3,,,,,,,
 26,,change trend topic,,industry,,,,,,,,industry,3,,,,,,,
 14,,discard and doubleBase,2,industry,,,,,,,,industry,3,,,,,,,

@@ -24,6 +24,7 @@ public class CardGameCubism : MonoBehaviour
 
     public void PlayAnim(int i )
     {
+        _motionController.StopAllAnimation();
         _motionController.PlayAnimation(_tapBodyMotions[i], isLoop: false, priority:CubismMotionPriority.PriorityNormal);
     }
     public void PlayExpression(int i )
