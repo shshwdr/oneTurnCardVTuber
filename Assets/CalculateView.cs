@@ -35,7 +35,7 @@ public class CalculateView : MonoBehaviour
         valueText.text = "="+(GameManager.Instance.BaseValue * GameManager.Instance.MultiplyValue).ToString();
         currentTotalValueText.text = GameManager.Instance.CurrentTotalValue.ToString();
         targetTotalValueText.text = GameManager.Instance.TargetValue.ToString();
-        levelText.text = "RewardLevel: "+GameManager.Instance.TargetLevel;
+        levelText.text =GameManager.Instance.TargetLevel=="0"?"": "RewardLevel: "+GameManager.Instance.TargetLevel;
         updateElement();
     }
     public void UpdateViewResetValue()
@@ -47,7 +47,7 @@ public class CalculateView : MonoBehaviour
         //valueText.text = (GameManager.Instance.BaseValue * GameManager.Instance.MultiplyValue).ToString();
         currentTotalValueText.text = GameManager.Instance.CurrentTotalValue.ToString();
         targetTotalValueText.text = GameManager.Instance.TargetValue.ToString();
-        levelText.text = "RewardLevel: "+GameManager.Instance.TargetLevel;
+        levelText.text =GameManager.Instance.TargetLevel=="0"?"": "RewardLevel: "+GameManager.Instance.TargetLevel;
         updateElement();
     }
     
@@ -59,7 +59,7 @@ public class CalculateView : MonoBehaviour
         valueText.text = "="+(GameManager.Instance.BaseValue * GameManager.Instance.MultiplyValue).ToString();
         currentTotalValueText.text = GameManager.Instance.CurrentTotalValue.ToString();
         targetTotalValueText.text = GameManager.Instance.TargetValue.ToString();
-        levelText.text = "RewardLevel: "+GameManager.Instance.TargetLevel;
+        levelText.text =GameManager.Instance.TargetLevel=="0"?"": "RewardLevel: "+GameManager.Instance.TargetLevel;
         updateElement();
     }
 
