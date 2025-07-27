@@ -97,13 +97,6 @@ public class GameManager : Singleton<GameManager>
         set
         {
             turn = value;
-            Day++;
-            if (turnInDay == turn)
-            {
-                Day++;
-                turn = 1;
-                GameRoundManager.Instance.Next();
-            }
 
             ResetEnergy();
             EventPool.Trigger("TurnChanged");

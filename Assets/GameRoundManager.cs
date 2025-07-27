@@ -44,7 +44,7 @@ public class GameRoundManager : Singleton<GameRoundManager>
                 break;
             case StateType.battle:
                 currentState = StateType.reward;
-
+                GameManager.Instance. Day++;
                 //if (CSVLoader.Instance.turnRequirementDict.ContainsKey(GameManager.Instance.Day))
                 {
                     
@@ -89,7 +89,7 @@ public class GameRoundManager : Singleton<GameRoundManager>
         else
         {
             
-            if(!CSVLoader.Instance.turnRequirementDict.ContainsKey(GameManager.Instance.Day))
+            if(CSVLoader.Instance.levelInfos.Count<GameManager.Instance.Day)
             {
                 GameWin();
                 yield break;
@@ -162,7 +162,7 @@ public class GameRoundManager : Singleton<GameRoundManager>
     
     public void GameWin()
     {
-        FindObjectOfType<GameOver>().ShowText("You saved the world!",true);
+        FindObjectOfType<GameOver>().ShowText("You earned enough money!\nThanks for playing!",true);
         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_level_win");
     }
 }
