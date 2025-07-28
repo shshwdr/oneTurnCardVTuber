@@ -60,6 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialKey: start
   pages: []
+  skipTutorial: {fileID: 0}
   finishExtraAction:
     m_PersistentCalls:
       m_Calls: []
@@ -325,8 +326,8 @@ PrefabInstance:
       objectReference: {fileID: 5591231819183041178}
     - target: {fileID: 7125538821336609699, guid: 829c2f53d86fbab4cb698ea608763070, type: 3}
       propertyPath: m_text
-      value: "During a stream, you'll play through your entire deck in one go \u2014
-        make it count!"
+      value: During a stream, you'll play through your entire deck in one go, make
+        it count!
       objectReference: {fileID: 0}
     - target: {fileID: 7576146747285230158, guid: 829c2f53d86fbab4cb698ea608763070, type: 3}
       propertyPath: m_SortingOrder
@@ -775,8 +776,7 @@ PrefabInstance:
       objectReference: {fileID: 3241355652595785767}
     - target: {fileID: 7125538821336609699, guid: 829c2f53d86fbab4cb698ea608763070, type: 3}
       propertyPath: m_text
-      value: "But be careful \u2014 if you play a different card, your Boost gets
-        reset!"
+      value: But be careful, if you play a different card, your Boost gets reset!
       objectReference: {fileID: 0}
     - target: {fileID: 7576146747285230158, guid: 829c2f53d86fbab4cb698ea608763070, type: 3}
       propertyPath: m_SortingOrder
@@ -1362,10 +1362,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8499508314320519966, guid: 02a1627a05976694abfdf4f6132e3064, type: 3}
       propertyPath: m_text
-      value: 'You are a wizard transported from another world.
-
-        To return
-        home, you must earn enough money.'
+      value: "You\u2019re a wizard. A real one. From another world.\nOne minute you
+        were casting a cosmic-level spell\u2026\n\u2026next thing you know, BAM!
+        You\u2019re in a modern apartment with a broken phone and zero income."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
