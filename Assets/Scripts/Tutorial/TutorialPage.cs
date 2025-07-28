@@ -99,8 +99,16 @@ public class TutorialPage : MonoBehaviour
         {
             
             var card = FindObjectOfType<CardVisualize>();
-            card.energy.transform.parent.gameObject.AddComponent<QuickAccessObject>().SetName("CardEnergy");
+            //card.energy.transform.parent.gameObject.AddComponent<QuickAccessObject>().SetName("CardEnergy");
             card.gameObject.gameObject.AddComponent<QuickAccessObject>().SetName("CardElement");
+        }
+        if (specialBeforeShow == "RemoveCardOb")
+        {
+            
+            var card = FindObjectOfType<CardVisualize>();
+            //card.energy.transform.parent.gameObject.AddComponent<QuickAccessObject>().SetName("CardEnergy");
+            Destroy(card.gameObject.gameObject.GetComponent<GraphicRaycaster>());
+            Destroy(card.gameObject.gameObject.GetComponent<Canvas>());
         }
     }
     private void Start()
@@ -131,7 +139,8 @@ public class TutorialPage : MonoBehaviour
             {
                 canv = obj.AddComponent<Canvas>();
             }
-            //if (otherNextObString == str)
+            var raycast = obj.GetComponent<GraphicRaycaster>();
+            if (!obj.GetComponent<GraphicRaycaster>())
             {
                 obj.AddComponent<GraphicRaycaster>();
             }

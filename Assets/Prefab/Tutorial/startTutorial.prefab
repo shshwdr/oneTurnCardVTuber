@@ -798,12 +798,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8696002487208438538, guid: 829c2f53d86fbab4cb698ea608763070, type: 3}
+      propertyPath: specialBeforeShow
+      value: RemoveCardOb
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696002487208438538, guid: 829c2f53d86fbab4cb698ea608763070, type: 3}
       propertyPath: moveUpObjsString.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8696002487208438538, guid: 829c2f53d86fbab4cb698ea608763070, type: 3}
       propertyPath: moveUpObjsString.Array.data[0]
-      value: Boost
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8696002487208438538, guid: 829c2f53d86fbab4cb698ea608763070, type: 3}
       propertyPath: moveUpObjsString.Array.data[1]
