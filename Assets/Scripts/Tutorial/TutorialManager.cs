@@ -18,6 +18,8 @@ public class TutorialManager : Singleton<TutorialManager>
     public TutorialType currentEnabledType;
     private TutorialMenu mainTutorialMenu;
      bool isInTutorial = false;
+
+     public bool isFirstCard = true;
     public void Init()
     {
         //mainTutorialMenu = GameObject.Find("MainTutorial").GetComponent<TutorialMenu>();

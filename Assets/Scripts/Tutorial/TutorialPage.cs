@@ -95,7 +95,13 @@ public class TutorialPage : MonoBehaviour
     {
         yield return null;
 
-
+        if (specialBeforeShow == "AddCardOb")
+        {
+            
+            var card = FindObjectOfType<CardVisualize>();
+            card.energy.transform.parent.gameObject.AddComponent<QuickAccessObject>().SetName("CardEnergy");
+            card.gameObject.gameObject.AddComponent<QuickAccessObject>().SetName("CardElement");
+        }
     }
     private void Start()
     {

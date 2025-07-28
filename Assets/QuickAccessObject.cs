@@ -12,6 +12,11 @@ public class QuickAccessObject : MonoBehaviour
         Init();
     }
 
+    public void SetName(string n)
+    {
+        accessName = n;
+        Init();
+    }
     public void Init()
     {
         if (accessName == null || accessName.Length == 0)

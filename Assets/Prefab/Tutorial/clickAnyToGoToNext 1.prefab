@@ -14,6 +14,14 @@ PrefabInstance:
         must earn enough money.\nAnd of course, the fastest way for a wizard to make
         money is... robbing a bank? No no no! It\u2019s streaming! Yes, livestreaming!"
       objectReference: {fileID: 0}
+    - target: {fileID: 887654799410523354, guid: 7d6e164911cf2d04a8f2ca3e2941b7c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 887654799410523354, guid: 7d6e164911cf2d04a8f2ca3e2941b7c9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1136580555
+      objectReference: {fileID: 0}
     - target: {fileID: 1440056899569235700, guid: 7d6e164911cf2d04a8f2ca3e2941b7c9, type: 3}
       propertyPath: m_Name
       value: clickAnyToGoToNext 1

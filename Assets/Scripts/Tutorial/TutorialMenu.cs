@@ -18,6 +18,8 @@ public class TutorialMenu : MonoBehaviour
 
     private void Start()
     {ShowPage(0);
+    
+
     }
     public void ShowPage(int page)
     {

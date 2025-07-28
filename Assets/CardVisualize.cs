@@ -43,6 +43,7 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
     CardElement cardElement;
     public void Init(CardInfo info)
     {
+        
         cardInfo = info;
         text.text = cardInfo.title;
         var inputList = cardInfo.actions;// Step 1: 创建一个 List<int> 存储所有找到的整数
