@@ -21,6 +21,8 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
     
     [SerializeField]
     public Image cardBK;
+    
+    public Image Icon;
     public TMP_Text energy;
     public TMP_Text cost;
     public TMP_Text type;
@@ -43,7 +45,11 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
     CardElement cardElement;
     public void Init(CardInfo info)
     {
-        
+        var iconImage = Resources.Load<Sprite>("card/" + info.icon);
+        if (iconImage)
+        {
+            Icon.sprite = iconImage;
+        }
         cardInfo = info;
         text.text = cardInfo.title;
         var inputList = cardInfo.actions;// Step 1: 创建一个 List<int> 存储所有找到的整数

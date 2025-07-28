@@ -73,6 +73,7 @@ public class CalculateView : MonoBehaviour
             cardVisualize.gameObject.SetActive(true);
             cardVisualize.Init(GameManager.Instance.cardInfo);
             cardVisualize.canInteract = false;
+            cardVisualize.highlight.gameObject.SetActive(false);
         }
         else
         {

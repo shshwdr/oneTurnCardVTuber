@@ -18,6 +18,7 @@ public class CardInfo
     public int selectType;
     public int start;
     public string title;
+    public string icon;
     public string desc;
     public int energy;
     public int cost;
