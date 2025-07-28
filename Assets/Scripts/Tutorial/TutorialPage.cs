@@ -71,6 +71,7 @@ public class TutorialPage : MonoBehaviour
         //         mask.GetComponent<RectTransform>().sizeDelta.y + 20f  // 增加高度
         //     );
         // }
+        StartPage();
     }
 
     public bool IsPointerInsideSpecialRect()
@@ -111,9 +112,10 @@ public class TutorialPage : MonoBehaviour
             Destroy(card.gameObject.gameObject.GetComponent<Canvas>());
         }
     }
-    private void Start()
-    {
 
+    public void StartPage()
+    {
+        
         if (specialBeforeShow.Length > 0)
         {
             StartCoroutine(specialActionEnumerator());
@@ -127,8 +129,8 @@ public class TutorialPage : MonoBehaviour
             var obj = SceneMenuManager.Instance.GetQuickAccessObject(str);
             if (obj == null)
             {
-                 Debug.LogError($"quickAccessObject not found: {str}");
-                 menu.FinishTutorial();
+                Debug.LogError($"quickAccessObject not found: {str}");
+                menu.FinishTutorial();
             }
             var canv = obj.GetComponent<Canvas>();
             if (obj.GetComponent<Canvas>())
@@ -166,10 +168,14 @@ public class TutorialPage : MonoBehaviour
         {
             var obj = SceneMenuManager.Instance.GetQuickAccessObject(fingerTarget);
             MatchUIPosition(obj.GetComponent<RectTransform>(),finger.GetComponent<RectTransform>(),fingerOffset);
-           // finger.transform.position = obj.transform.position + fingerOffset;
+            // finger.transform.position = obj.transform.position + fingerOffset;
         }
 
-        
+
+    }
+    private void Start()
+    {
+
     }
     public static void MatchUIPosition(RectTransform targetPosition, RectTransform moveTrans,Vector2 fingerOffset)
     {

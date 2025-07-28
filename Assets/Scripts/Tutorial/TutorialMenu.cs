@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using Pool;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class TutorialMenu : MonoBehaviour
 {
     public string tutorialKey;
     public TutorialPage[] pages;
+
+    public Button skipTutorial;
 
     public UnityEvent  finishExtraAction;
     // Start is called before the first frame update
@@ -16,9 +19,23 @@ public class TutorialMenu : MonoBehaviour
         
     }
 
+    public void StartTutorial()
+    {
+        page = 0;
+        
+        ShowPage(0);
+        if (skipTutorial)
+        {
+            skipTutorial.gameObject.SetActive(true);
+            skipTutorial.onClick.AddListener(() =>
+            {
+                FinishTutorial();
+            });
+        }
+    }
     private void Start()
-    {ShowPage(0);
-    
+    {
+        StartTutorial();
 
     }
     public void ShowPage(int page)
@@ -29,6 +46,7 @@ public class TutorialMenu : MonoBehaviour
         }
         for(int i = 0; i < pages.Length; i++){
             pages[i].gameObject.SetActive(i == page);
+            //pages[i].StartPage();
         }
         pages[page].Init(this,page);
     }
@@ -48,6 +66,10 @@ public class TutorialMenu : MonoBehaviour
         HidePage();
         finishExtraAction?.Invoke();
         TutorialManager.Instance.FinishTutorial();
+        if (skipTutorial)
+        {
+            skipTutorial.gameObject.SetActive(false);
+        }
     }
     public void gotoNextPage()
     {
