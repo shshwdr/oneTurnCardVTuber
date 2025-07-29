@@ -245,9 +245,9 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
         //sort by result's distance to selectionCicle
         // results = results.Where(x => x != null)
         //     .OrderBy(x => Vector3.Distance(x.transform.position, selectionCircle.transform.position)).ToArray();
+        GameManager.Instance.ConsumeEnergy(cardInfo.energy);
         HandManager.Instance.useCard(cardInfo);
 
-        GameManager.Instance.ConsumeEnergy(cardInfo.energy);
         // if (ItemManager.Instance.buffManager.hasBuff("lastCardTwice") && HandManager.Instance.handInBattle.Count == 0)
         // {
         //     EventPool.Trigger<string>("ItemTrigger","lastCardTwice");
