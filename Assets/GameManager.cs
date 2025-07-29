@@ -39,9 +39,9 @@ public class GameManager : Singleton<GameManager>
         return Energy >= e;
     }
 
-    public void ConsumeEnergy(int e)
+    public void ConsumeEnergy(int e,CardInfo lastUseCard)
     {
-        HandManager.Instance.DrawCard(e);
+        HandManager.Instance.DrawCard(e,lastUseCard);
         //Energy -= e;
     }
 

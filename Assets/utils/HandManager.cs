@@ -361,21 +361,21 @@ public class HandManager : Singleton<HandManager>
 
     void TriggerDiscardEffect()
     {
-        
-        if (ItemManager.Instance.buffManager.hasBuff("addEnergyWhenDiscard"))
-        {
-            //GameManager.Instance.Energy += 1;
-            EventPool.Trigger<string>("ItemTrigger","addEnergyWhenDiscard");
-
-        }
-        
-        
-        if (ItemManager.Instance.buffManager.hasBuff("discardAndDraw"))
-        {
-            EventPool.Trigger<string>("ItemTrigger","discardAndDraw");
-
-            DrawCard(1);
-        }
+        //
+        // if (ItemManager.Instance.buffManager.hasBuff("addEnergyWhenDiscard"))
+        // {
+        //     //GameManager.Instance.Energy += 1;
+        //     EventPool.Trigger<string>("ItemTrigger","addEnergyWhenDiscard");
+        //
+        // }
+        //
+        //
+        // if (ItemManager.Instance.buffManager.hasBuff("discardAndDraw"))
+        // {
+        //     EventPool.Trigger<string>("ItemTrigger","discardAndDraw");
+        //
+        //     DrawCard(1);
+        // }
         
     }
 
@@ -444,7 +444,7 @@ public class HandManager : Singleton<HandManager>
         discardedInBattle.AddRange(handInBattle);
         handInBattle.Clear();
     }
-    public void DrawCard(int count)
+    public void DrawCard(int count,CardInfo lastUseCard = null)
     {
         //discardedInBattle.AddRange(handInBattle);
         //handInBattle.Clear();
@@ -460,7 +460,16 @@ public class HandManager : Singleton<HandManager>
                 break;
             }
 
-
+            if (i == count - 1 && HandManager.Instance.EnergyInHand() <=(lastUseCard!=null? lastUseCard.energy:0) && HandManager.Instance.EnergyInDeck() !=0)
+            {
+                var deckWithEnergy = deck.Where(x => x.energy > 0).ToList();
+                var info = deckWithEnergy.PickItem();
+                deck.Remove(info);
+                handInBattle.Add(info);
+                HandsView.Instance.AddCardToHand(info);
+                    
+            }
+            else
             {
 
                 var info = deck.PickItem();
@@ -549,14 +558,36 @@ public class HandManager : Singleton<HandManager>
 
            
             {
-                var info = deck.PickItem();
-                handInBattle.Add(info);
-                HandsView.Instance.AddCardToHand(info);
+                if (i == handMax - 1 && HandManager.Instance.EnergyInHand() == 0 && HandManager.Instance.EnergyInDeck() !=0)
+                {
+                    var deckWithEnergy = deck.Where(x => x.energy > 0).ToList();
+                    var info = deckWithEnergy.PickItem();
+                    deck.Remove(info);
+                    handInBattle.Add(info);
+                    HandsView.Instance.AddCardToHand(info);
+                    
+                }
+                else
+                {
+                    
+                    var info = deck.PickItem();
+                    handInBattle.Add(info);
+                    HandsView.Instance.AddCardToHand(info);
+                }
             }
         }
         EventPool.Trigger("DrawHand");
     }
 
+    int EnergyInHand()
+    {
+        return handInBattle.Sum(x => x.energy);
+    }
+
+    int EnergyInDeck()
+    {
+        return deck.Sum(x => x.energy);
+    }
     public void ClearBattleHand()
     {
         HandsView.Instance.RemoveAllFromHand();
