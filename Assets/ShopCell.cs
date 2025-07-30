@@ -28,7 +28,7 @@ public class ShopCell : MonoBehaviour
             FindObjectOfType<ShopMenu>().UpdateMenu();
             //FindObjectOfType<ShopMenu>().Hide();
             //GameManager.Instance.Next();
-            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_buy_joker");
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_buy_cards");
             
         });
         

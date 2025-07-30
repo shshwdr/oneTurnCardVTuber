@@ -32,6 +32,8 @@ public class SelectCardsView : MenuBase
 
     public void Show(int count, SelectCardsViewType type)
     {
+        
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_return_cards");
         visuals.Clear();
 
         count = math.min(count, HandManager.Instance.handInBattle.Count);
@@ -133,6 +135,8 @@ public class SelectCardsView : MenuBase
                 Debug.Log("鼠标在 UI 区域内！");
                 cardSlot.cardVisual.isSelected = true;
                 cardSlot.cardVisual.transform.position = slot.transform.position;
+                
+                FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_select_discard");
                 visuals[ slot] = cardSlot.cardVisual;
                 UpdateView();
                 return true;
