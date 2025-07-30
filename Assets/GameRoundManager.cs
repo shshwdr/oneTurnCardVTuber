@@ -84,7 +84,17 @@ public class GameRoundManager : Singleton<GameRoundManager>
 
         if (GameManager.Instance.targetIndex == 0)
         {
-            GameOver("Better get more tips next time");
+            var loseText = "Better get more tips next time";
+            if (HandManager.Instance.handInBattle.Count == 0)
+            {
+                loseText = "You have no cards in hand.\n"+loseText;
+            }
+
+            if (HandManager.Instance.deck.Count == 0)
+            {
+                loseText = "You have no cards in deck.\n"+loseText;
+            }
+            GameOver(loseText);
         }
         else
         {
