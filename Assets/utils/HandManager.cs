@@ -91,9 +91,10 @@ public class HandManager : Singleton<HandManager>
                     foreach (var hCardInfo in HandManager.Instance.handInBattle)
                     {
                         hCardInfo.element1 = GameManager.Instance.cardInfo.element1;
-                    }
-                    
-                    break;
+                            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_joker_cards");
+                        }
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_joker_cards");
+                        break;
                 }
                 case "removeEnergy":
                 {
@@ -102,27 +103,31 @@ public class HandManager : Singleton<HandManager>
                     FindObjectOfType<SelectCardsView>(). Show(value, SelectCardsViewType.RemoveEnergy);
                     
                     yield return new WaitUntil(()=>!FindObjectOfType<SelectCardsView>().isActive);
-                    break;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_change_boost");
+                        break;
                 }
                 case "addBaseEqualToEnergy":
                 {
                     GameManager.Instance.BaseValue += GameManager.Instance.Energy;
-                    break;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_change_boost");
+                        break;
                 }
                 case "doubleBoost":
                 {
                     GameManager.Instance.boost *= 2;
                     break;
-                }
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_change_boost");
+                    }
                 case "base":
                 {
                     i++;
                     int value = int.Parse(info.actions[i]);
                     value = valueAddBuff(info.buff,info.actions[i-1], value);
                     GameManager.Instance.BaseValue += value;
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_industry_card");
-                    break;
-                }
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_increase_status");
+                        break;
+                       
+                    }
                 case "multiplier":
                 {
                     i++;
@@ -130,22 +135,25 @@ public class HandManager : Singleton<HandManager>
                     value = valueAddBuff(info.buff,info.actions[i-1], value);
 
                     GameManager.Instance.MultiplyValue += value;
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_industry_card");
-                    break;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_increase_status");
+                        break;
                 }
                 case "returnCard":
                 {
-                    i++;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_return_cards");
+                        i++;
                     int value = int.Parse(info.actions[i]);
                     FindObjectOfType<SelectCardsView>().Show( value, SelectCardsViewType.Return);
                     yield return new WaitUntil(()=>!FindObjectOfType<SelectCardsView>().isActive);
-                    //HandsView.Instance.ReturnCard(value);
-                    break;
+                        //HandsView.Instance.ReturnCard(value);
+                       
+                        break;
                 }
                 case "clearLastCard":
                 {
-                    //GameManager.Instance.ClearLastCard();
-                    break;
+                        //GameManager.Instance.ClearLastCard();
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_joker_cards");
+                        break;
                 }
                 case "addCard":
                 {
@@ -181,24 +189,28 @@ public class HandManager : Singleton<HandManager>
                 {
                     GameManager.Instance.MultiplyValue += GameManager.Instance.boost;
                     break;
-                }
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_change_boost");
+                    }
                 case "attack":
                 {
                     GameManager.Instance.Calculate(info);
-                    break;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_get_tips");
+                        break;
                 }
                 case "attackD":
                 {
                     GameManager.Instance.Calculate(info);
                     GameManager.Instance.Calculate(info);
-                    break;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_get_tips");
+                        break;
                 }
                 case "exchangeBaseAndMult":
                 {
                     var temp = GameManager.Instance.BaseValue;
                     GameManager.Instance.BaseValue = GameManager.Instance.MultiplyValue;
                     GameManager.Instance.MultiplyValue = temp;
-                    break;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_change_boost");
+                        break;
                 }
                 
                 case "draw":
@@ -211,24 +223,25 @@ public class HandManager : Singleton<HandManager>
                 }
                 case "discard":
                 {
-                    i++;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_return_cards");
+                        i++;
                     int value = int.Parse(info.actions[i]);
                     FindObjectOfType<SelectCardsView>().Show( value, SelectCardsViewType.Discard);
-                    //HandsView.Instance.DiscardCards(value);
-                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_neutral_card");
-                        
+                    //HandsView.Instance.DiscardCards(value);                       
                         yield return new WaitUntil(()=>!FindObjectOfType<SelectCardsView>().isActive);
+                      
                         break;
                 }
                 case "discardHand":
-                {
-                    HandsView.Instance.DiscardHand();
-                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_neutral_card");
+                {                       
+                        HandsView.Instance.DiscardHand();
+                       
                         break;
                 }
                 case "when":
                 {
-                    break;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_return_cards");
+                        break;
                 }
         }
         }
@@ -432,6 +445,7 @@ public class HandManager : Singleton<HandManager>
             }
             var info = handInBattle.PickItem();
             DiscardCard( info);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_select_discard");
         }
       
         EventPool.Trigger("DrawHand");  

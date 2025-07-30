@@ -194,9 +194,10 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
             return;
         }
         Debug.Log("OnPointerDown");
-        
+   
+
         OnPlace();
-        
+
         // if (!isDraggable)
         // {
         //     return;
@@ -212,6 +213,7 @@ public class CardVisualize : MonoBehaviour, IPointerDownHandler,IPointerEnterHan
         //selectionCircle.transform.localScale = Vector3.one * radius;
         //selectionCircle.SetActive(true);
         //PlayerControllerManager.Instance.StartDragging(selectionCircle,this);
+      
     }
 
     public void SetInShop()

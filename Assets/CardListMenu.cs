@@ -17,6 +17,8 @@ public class CardListMenu : MenuBase
         var cards = HandManager.Instance.ownedCards;
         title.text = "All Cards";
         UpdateCards(cards);
+
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_ui_click");
     }
 
     public void ShowCardInDeckInBattle()
@@ -31,6 +33,8 @@ public class CardListMenu : MenuBase
         title.text = "Cards In Hand";
         var cards = HandManager.Instance.deck;
         UpdateCards(cards);
+
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_ui_click");
     }
 
     public void ShowCardInDiscardInBattle()
@@ -39,6 +43,8 @@ public class CardListMenu : MenuBase
         title.text = "Discarded Cards";
         var cards = HandManager.Instance.discardedInBattle;
         UpdateCards(cards);
+
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_ui_click");
     }
 
     void UpdateCards( List<CardInfo>cards)
@@ -54,6 +60,8 @@ public class CardListMenu : MenuBase
         for (int i = cards.Count; i < cardVisualizes.Length; i++)
         {
             cardVisualizes[i].gameObject.SetActive(false);
+
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_ui_click");
         }
     }
     // Start is called before the first frame update

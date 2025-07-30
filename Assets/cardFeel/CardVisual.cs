@@ -185,6 +185,8 @@ public class CardVisual : MonoBehaviour
             transform.DOScale(scaleOnSelect, scaleTransition).SetEase(scaleEase);
 
         canvas.overrideSorting = true;
+
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_hold_card");
     }
 
     private void EndDrag(CardSlot cardSlot)
@@ -202,6 +204,8 @@ public class CardVisual : MonoBehaviour
         shakeParent.DOPunchRotation(Vector3.forward * hoverPunchAngle, hoverTransition, 20, 1).SetId(2);
         
         canvas.overrideSorting = true;
+
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_mouse_on_card");
     }
 
     private void PointerExit(CardSlot cardSlot)
