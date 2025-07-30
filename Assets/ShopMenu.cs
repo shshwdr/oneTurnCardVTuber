@@ -24,7 +24,7 @@ public class ShopMenu : MenuBase
             GameManager.Instance.Gold -= refreshCost;
             ShowItemPurchase();
             refreshButton.GetComponentInChildren<TMP_Text>().color = GameManager.Instance.Gold >= refreshCost? Color.black: Color.red;
-            goldText.text = GameManager.Instance.Gold.ToString();
+            goldText.text = "Gold: "+GameManager.Instance.Gold.ToString();
         }
     }
 
