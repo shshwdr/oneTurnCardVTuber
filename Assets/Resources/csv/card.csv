@@ -14,9 +14,9 @@ All-In Moment,lotsCards,addCard|Dead Air|4,2,industry,All-In Moment,,0,All-In Mo
 Dead Air,,base|-1,1,industry,Dead Air,,0,Dead Air,Dead Air,0,,,industry,3,,,7,5,exchange: exchange or increase vibe by decrease viewers and make the final value large,,
 Clickbait Title,buff,addBuff|base|6,2,industry,Clickbait Title,,0,Clickbait Title,"all cards in hand that would change viewers, increase {0}",1,,,industry,3,,,5,1,discard: get benefit when discard card,,
 Exclusive Scoop,buff,addBuff|multiplier|2,2,industry,Exclusive Scoop,,0,Exclusive Scoop,"all cards in hand that would change vibe, increase {0}",1,,,industry,3,,,0,1,return: get benefit when add card to deck,,
-"	Hype Party",boost,boosterToMultiplier,1,industry,"	Hype Party",,0,"	Hype Party",add boost value to multiplier,1,,,industry,3,,,6,6,lotsCards: make your deck huge and get benefit,1,magic
+Hype Party,boost,boosterToMultiplier,1,industry,Hype Party,,0,"	Hype Party",add boost value to vibe,1,,,industry,3,,,6,6,lotsCards: make your deck huge and get benefit,1,magic
 Balance,exchange,base|-5|multiplier|5,2,industry,Balance,,0,Balance, {0} viewers and +{1} vibe,1,,,industry,3,,,1,3,final: increase viewers and vibe and at last get tips lots of times to get high final result.,,
-Exchange ,exchange,exchangeBaseAndMult|discard|2,1,industry,Exchange ,,,Exchange ,discard {0} and exchange viewers and vibe value,1,,,industry,3,,,1,6,buff: add buff(increase value of viewers or vibe) a lot and get benefit.,,magic
+Exchange,exchange,exchangeBaseAndMult|discard|2,1,industry,Exchange,,,Exchange ,discard {0} and exchange viewers and vibe value,1,,,industry,3,,,1,6,buff: add buff(increase value of viewers or vibe) a lot and get benefit.,,magic
 Hot Topic,boost,doubleBoost,2,industry,Hot Topic,,,Hot Topic,double current boost,1,,,industry,3,,,1,6,,,magic
 Energized,,removeEnergy|2,2,industry,Energized,0,0,Energized,make energy of {0} cards to 0,1,,,industry,3,,,5,6,,,magic
 22,final,"discard all card but one, that one play 5 times",0,industry,,,,,,,,,industry,3,,,,,,,

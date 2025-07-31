@@ -19,6 +19,7 @@ public class CardInfo
     public int start;
     public string title;
     public string icon;
+    public Sprite iconSprite => Resources.Load<Sprite>("card/" + icon);
     public string desc;
     public int energy;
     public int cost;
@@ -113,6 +114,10 @@ public class CSVLoader : Singleton<CSVLoader>
         foreach (var info in heroInfos)
         {
             cardDict[info.identifier] = info;
+            if (info.iconSprite == null)
+            {
+                //Debug.LogError("iconSprite is null for " + info.identifier);
+            }
         }
         var turnRequirements =
             CsvUtil.LoadObjects<TurnRequirementInfo>(GetFileNameWithABTest("turnRequirement"));

@@ -25,6 +25,8 @@ public class HandManager : Singleton<HandManager>
 
     public void useCard(CardInfo info)
     {
+        EmojiFlyIn.Instance.SpawnEmoji(info.iconSprite);
+        
         placedCount++;
         handInBattle.Remove(info);
         if (info.exhaust)
